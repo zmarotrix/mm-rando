@@ -111,7 +111,7 @@ namespace MMRando
 
             // todo find a better solution for this.
             // Blast_Mask cannot be replaced by Kafei_Letter or Pendant because it interferes with Kafei Quest. Cannot contain trade items because you might need them for Letter/Pendant.
-            { Blast_Mask, new List<int> { Kafei_Letter, Pendant, Moon_Tear, Land_Deed, Swamp_Deed, Mountain_Deed, Ocean_Deed } },
+            { Blast_Mask, new List<int> { Pendant, Moon_Tear, Land_Deed, Swamp_Deed, Mountain_Deed, Ocean_Deed } },
 
             // Keaton_Mask and Mama_Letter are obtained one directly after another
             // Keaton_Mask cannot be replaced by items that may be overwritten by item obtained at Mama_Letter
