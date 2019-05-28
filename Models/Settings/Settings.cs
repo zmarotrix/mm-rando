@@ -117,6 +117,16 @@ namespace MMRando.Models
         public bool AddDungeonItems { get; set; }
 
         /// <summary>
+        /// Add Heart Pieces to the randomization pool
+        /// </summary>
+        public bool AddHeartPieces { get; set; }
+
+        /// <summary>
+        /// Add Tingle Maps to the randomization pool
+        /// </summary>
+        public bool AddTingleMaps { get; set; }
+
+        /// <summary>
         /// Add shop items to the randomization pool
         /// </summary>
         public bool AddShopItems { get; set; }
@@ -245,6 +255,8 @@ namespace MMRando.Models
             int part3 = (int)parts[2];
             int part4 = (int)parts[3];
 
+            AddTingleMaps = (part1 & 65536) > 0;
+            AddHeartPieces = (part1 & 32768) > 0;
             FreeHints = (part1 & 16384) > 0;
             UseCustomItemList = (part1 & 8192) > 0;
             AddOther = (part1 & 4096) > 0;
@@ -293,6 +305,8 @@ namespace MMRando.Models
         {
             int[] parts = new int[4];
 
+            if (AddTingleMaps) { parts[0] += 65536; };
+            if (AddHeartPieces) { parts[0] += 32768; };
             if (FreeHints) { parts[0] += 16384; };
             if (UseCustomItemList) { parts[0] += 8192; };
             if (AddOther) { parts[0] += 4096; };

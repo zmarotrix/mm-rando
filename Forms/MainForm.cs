@@ -218,6 +218,8 @@ namespace MMRando
             cBottled.Checked = _settings.RandomizeBottleCatchContents;
             cDChests.Checked = _settings.AddDungeonItems;
             cShop.Checked = _settings.AddShopItems;
+            cHeartPieces.Checked = _settings.AddHeartPieces;
+            cTingleMaps.Checked = _settings.AddTingleMaps;
             cDEnt.Checked = _settings.RandomizeDungeonEntrances;
             cBGM.Checked = _settings.RandomizeBGM;
             cEnemy.Checked = _settings.RandomizeEnemies;
@@ -245,22 +247,22 @@ namespace MMRando
 
         private void cUserItems_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateSingleSetting(() => _settings.UseCustomItemList = cUserItems.Checked);
-
             cDChests.Checked = false;
-            UpdateSingleSetting(() => _settings.AddDungeonItems = false);
 
             cShop.Checked = false;
-            UpdateSingleSetting(() => _settings.AddShopItems = false);
+
+            cHeartPieces.Checked = false;
+
+            cTingleMaps.Checked = false;
 
             cBottled.Checked = false;
-            UpdateSingleSetting(() => _settings.RandomizeBottleCatchContents = false);
 
             cSoS.Checked = false;
-            UpdateSingleSetting(() => _settings.ExcludeSongOfSoaring = false);
 
             cAdditional.Checked = false;
-            UpdateSingleSetting(() => _settings.AddOther = false);
+
+            UpdateSingleSetting(() => _settings.UseCustomItemList = cUserItems.Checked);
+
 
         }
 
@@ -378,6 +380,16 @@ namespace MMRando
             UpdateSingleSetting(() => _settings.AddShopItems = cShop.Checked);
         }
 
+        private void cHeartPieces_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateSingleSetting(() => _settings.AddHeartPieces = cHeartPieces.Checked);
+        }
+
+        private void cTingleMaps_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateSingleSetting(() => _settings.AddTingleMaps = cTingleMaps.Checked);
+        }
+
         private void cSoS_CheckedChanged(object sender, EventArgs e)
         {
             UpdateSingleSetting(() => _settings.ExcludeSongOfSoaring = cSoS.Checked);
@@ -462,6 +474,8 @@ namespace MMRando
                 cDEnt.Enabled = false;
                 cBottled.Enabled = false;
                 cShop.Enabled = false;
+                cHeartPieces.Enabled = false;
+                cTingleMaps.Enabled = false;
                 cSpoiler.Enabled = false;
                 cGossip.Enabled = false;
                 cAdditional.Enabled = false;
@@ -475,6 +489,8 @@ namespace MMRando
                 cDEnt.Enabled = true;
                 cBottled.Enabled = true;
                 cShop.Enabled = true;
+                cHeartPieces.Enabled = true;
+                cTingleMaps.Enabled = true;
                 cSpoiler.Enabled = true;
                 cGossip.Enabled = true;
                 cAdditional.Enabled = true;
@@ -488,7 +504,11 @@ namespace MMRando
                 cSoS.Enabled = false;
                 cDChests.Enabled = false;
                 cBottled.Enabled = false;
+                cHeartPieces.Enabled = false;
+                cTingleMaps.Enabled = false;
                 cShop.Enabled = false;
+                cHeartPieces.Enabled = false;
+                cTingleMaps.Enabled = false;
                 cAdditional.Enabled = false;
             }
             else
@@ -527,7 +547,7 @@ namespace MMRando
 
             update?.Invoke();
             UpdateSettingsString();
-            ToggleCheckBoxes(); // why was this here?
+            ToggleCheckBoxes(); // why is this here?
 
             _isUpdating = false;
         }
@@ -557,6 +577,8 @@ namespace MMRando
             cMixSongs.Enabled = v;
             cSoS.Enabled = v;
             cShop.Enabled = v;
+            cHeartPieces.Enabled = v;
+            cTingleMaps.Enabled = v;
             cUserItems.Enabled = v;
             cVC.Enabled = v;
             cQText.Enabled = v;
@@ -717,31 +739,21 @@ namespace MMRando
                 _settings.InputPatchFilename = null;
                 tPatch.Text = null;
 
-                cFreeHints.Enabled = true;
-                cQText.Enabled = true;
-                cCutsc.Enabled = true;
-                tSeed.Enabled = true;
-                tSString.Enabled = true;
-                cLink.Enabled = true;
+                TogglePatchSettings(true);
             }
         }
 
 
         private void TogglePatchSettings(bool v)
         {
-            cAdditional.Checked = false;
             cAdditional.Enabled = v;
 
-            cBottled.Checked = false;
             cBottled.Enabled = v;
 
-            cCutsc.Checked = false;
             cCutsc.Enabled = v;
 
-            cDChests.Checked = false;
             cDChests.Enabled = v;
 
-            cDEnt.Checked = false;
             cDEnt.Enabled = v;
 
             cMode.Enabled = v;
@@ -750,44 +762,37 @@ namespace MMRando
 
             cDType.Enabled = v;
 
-            cDummy.Checked = false;
             cDummy.Enabled = v;
 
-            cEnemy.Checked = false;
             cEnemy.Enabled = v;
-
 
             cFloors.Enabled = v;
 
-            cGossip.Checked = false;
             cGossip.Enabled = v;
 
             cGravity.Enabled = v;
 
             cLink.Enabled = v;
 
-            cMixSongs.Checked = false;
             cMixSongs.Enabled = v;
 
-            cSoS.Checked = false;
             cSoS.Enabled = v;
 
-            cShop.Checked = false;
             cShop.Enabled = v;
 
-            cUserItems.Checked = false;
-            cUserItems.Enabled = v;
+            cHeartPieces.Enabled = v;
 
-            cQText.Checked = false;
+            cTingleMaps.Enabled = v;
+
+            cUserItems.Enabled = v;
+            UpdateSingleSetting(() => _settings.UseCustomItemList = cUserItems.Checked);
+
             cQText.Enabled = v;
 
-            cSpoiler.Checked = false;
             cSpoiler.Enabled = v;
 
-            cFreeHints.Checked = false;
             cFreeHints.Enabled = v;
 
-            cHTMLLog.Checked = false;
             cHTMLLog.Enabled = v;
 
             tSeed.Enabled = v;

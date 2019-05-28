@@ -1355,6 +1355,16 @@ namespace MMRando
                 PreserveOther();
             }
 
+            if(!_settings.AddHeartPieces)
+            {
+                PreserveHeartPieces();
+            }
+
+            if(!_settings.AddTingleMaps)
+            {
+                PreserveTingleMaps();
+            }
+
             if (_settings.RandomizeBottleCatchContents)
             {
                 AddBottleCatchContents();
@@ -1398,11 +1408,42 @@ namespace MMRando
         /// </summary>
         private void PreserveOther()
         {
-            for (int i = Items.ChestLensCaveRedRupee; i <= Items.ChestToGoronRaceGrotto; i++)
+            for (int i = Items.ChestLensCaveRedRupee; i <= Items.ChestToGoronVillageRedRupee; i++)
+            {
+                ItemList[i].ReplacesItemId = i;
+            }
+
+            for (int i = Items.ChestSecretShrineDinoGrotto; i <= Items.ChestSouthClockTownPurpleRupee; i++)
             {
                 ItemList[i].ReplacesItemId = i;
             }
         }
+
+        private void PreserveHeartPieces()
+        {
+            for (int i = Items.HeartPieceNotebookMayor; i <= Items.HeartPieceKnuckle; i++)
+            {
+                ItemList[i].ReplacesItemId = i;
+            }
+
+            for (int i = Items.HeartPieceSouthClockTown; i <= Items.HeartContainerStoneTower; i++)
+            {
+                ItemList[i].ReplacesItemId = i;
+            }
+
+            ItemList[Items.ChestSecretShrineHeartPiece].ReplacesItemId = Items.ChestSecretShrineHeartPiece;
+            ItemList[Items.HeartPieceBank].ReplacesItemId = Items.HeartPieceBank;
+        }
+
+        private void PreserveTingleMaps()
+        {
+            for (int i = Items.ItemTingleMapTown; i <= Items.ItemTingleMapStoneTower; i++)
+            {
+                ItemList[i].ReplacesItemId = i;
+            }
+        }
+
+
 
         /// <summary>
         /// Keeps shop items vanilla

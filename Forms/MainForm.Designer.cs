@@ -46,6 +46,8 @@ namespace MMRando
             this.cN64 = new System.Windows.Forms.CheckBox();
             this.lOutput = new System.Windows.Forms.Label();
             this.tabMain = new System.Windows.Forms.TabPage();
+            this.cHeartPieces = new System.Windows.Forms.CheckBox();
+            this.cTingleMaps = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cAdditional = new System.Windows.Forms.CheckBox();
@@ -113,6 +115,7 @@ namespace MMRando
             this.tpPatchSettings = new System.Windows.Forms.TabPage();
             this.tPatch = new System.Windows.Forms.TextBox();
             this.bLoadPatch = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tSettings.SuspendLayout();
             this.tabROMSettings.SuspendLayout();
             this.tabMain.SuspendLayout();
@@ -122,6 +125,7 @@ namespace MMRando
             this.ttOutput.SuspendLayout();
             this.tpOutputSettings.SuspendLayout();
             this.tpPatchSettings.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // bopen
@@ -151,7 +155,7 @@ namespace MMRando
             this.cUserItems.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.cUserItems.AutoSize = true;
             this.cUserItems.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cUserItems.Location = new System.Drawing.Point(187, 45);
+            this.cUserItems.Location = new System.Drawing.Point(187, 44);
             this.cUserItems.Name = "cUserItems";
             this.cUserItems.Size = new System.Drawing.Size(119, 17);
             this.cUserItems.TabIndex = 11;
@@ -169,7 +173,7 @@ namespace MMRando
             this.tSettings.Location = new System.Drawing.Point(0, 23);
             this.tSettings.Name = "tSettings";
             this.tSettings.SelectedIndex = 0;
-            this.tSettings.Size = new System.Drawing.Size(354, 298);
+            this.tSettings.Size = new System.Drawing.Size(354, 327);
             this.tSettings.TabIndex = 10;
             // 
             // tabROMSettings
@@ -186,7 +190,7 @@ namespace MMRando
             this.tabROMSettings.Location = new System.Drawing.Point(4, 25);
             this.tabROMSettings.Name = "tabROMSettings";
             this.tabROMSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabROMSettings.Size = new System.Drawing.Size(346, 269);
+            this.tabROMSettings.Size = new System.Drawing.Size(346, 298);
             this.tabROMSettings.TabIndex = 3;
             this.tabROMSettings.Text = "ROM Settings";
             this.tabROMSettings.UseVisualStyleBackColor = true;
@@ -288,27 +292,47 @@ namespace MMRando
             // 
             // tabMain
             // 
-            this.tabMain.Controls.Add(this.label3);
-            this.tabMain.Controls.Add(this.label2);
-            this.tabMain.Controls.Add(this.cAdditional);
-            this.tabMain.Controls.Add(this.cGossip);
-            this.tabMain.Controls.Add(this.cSoS);
+            this.tabMain.Controls.Add(this.groupBox1);
             this.tabMain.Controls.Add(this.cUserItems);
-            this.tabMain.Controls.Add(this.cMixSongs);
-            this.tabMain.Controls.Add(this.cEnemy);
-            this.tabMain.Controls.Add(this.cDChests);
-            this.tabMain.Controls.Add(this.cBottled);
-            this.tabMain.Controls.Add(this.cDEnt);
-            this.tabMain.Controls.Add(this.cShop);
             this.tabMain.Controls.Add(this.lMode);
             this.tabMain.Controls.Add(this.cMode);
             this.tabMain.Location = new System.Drawing.Point(4, 25);
             this.tabMain.Name = "tabMain";
             this.tabMain.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMain.Size = new System.Drawing.Size(346, 269);
+            this.tabMain.Size = new System.Drawing.Size(346, 298);
             this.tabMain.TabIndex = 0;
             this.tabMain.Text = "Main Settings";
             this.tabMain.UseVisualStyleBackColor = true;
+            // 
+            // cHeartPieces
+            // 
+            this.cHeartPieces.AutoSize = true;
+            this.cHeartPieces.BackColor = System.Drawing.Color.Transparent;
+            this.cHeartPieces.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cHeartPieces.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cHeartPieces.ForeColor = System.Drawing.Color.Black;
+            this.cHeartPieces.Location = new System.Drawing.Point(49, 50);
+            this.cHeartPieces.Name = "cHeartPieces";
+            this.cHeartPieces.Size = new System.Drawing.Size(86, 17);
+            this.cHeartPieces.TabIndex = 16;
+            this.cHeartPieces.Text = "Heart pieces";
+            this.cHeartPieces.UseVisualStyleBackColor = false;
+            this.cHeartPieces.CheckedChanged += new System.EventHandler(this.cHeartPieces_CheckedChanged);
+            // 
+            // cTingleMaps
+            // 
+            this.cTingleMaps.AutoSize = true;
+            this.cTingleMaps.BackColor = System.Drawing.Color.Transparent;
+            this.cTingleMaps.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cTingleMaps.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cTingleMaps.ForeColor = System.Drawing.Color.Black;
+            this.cTingleMaps.Location = new System.Drawing.Point(52, 119);
+            this.cTingleMaps.Name = "cTingleMaps";
+            this.cTingleMaps.Size = new System.Drawing.Size(83, 17);
+            this.cTingleMaps.TabIndex = 15;
+            this.cTingleMaps.Text = "Tingle maps";
+            this.cTingleMaps.UseVisualStyleBackColor = false;
+            this.cTingleMaps.CheckedChanged += new System.EventHandler(this.cTingleMaps_CheckedChanged);
             // 
             // label3
             // 
@@ -316,7 +340,7 @@ namespace MMRando
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(102, 212);
+            this.label3.Location = new System.Drawing.Point(87, 160);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(143, 13);
             this.label3.TabIndex = 14;
@@ -326,11 +350,11 @@ namespace MMRando
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label2.Location = new System.Drawing.Point(10, 208);
+            this.label2.Location = new System.Drawing.Point(9, 159);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(325, 13);
+            this.label2.Size = new System.Drawing.Size(301, 13);
             this.label2.TabIndex = 14;
-            this.label2.Text = "_____________________________________________________";
+            this.label2.Text = "_________________________________________________";
             // 
             // cAdditional
             // 
@@ -339,7 +363,7 @@ namespace MMRando
             this.cAdditional.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cAdditional.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cAdditional.ForeColor = System.Drawing.Color.Black;
-            this.cAdditional.Location = new System.Drawing.Point(208, 147);
+            this.cAdditional.Location = new System.Drawing.Point(201, 119);
             this.cAdditional.Name = "cAdditional";
             this.cAdditional.Size = new System.Drawing.Size(98, 17);
             this.cAdditional.TabIndex = 12;
@@ -354,7 +378,7 @@ namespace MMRando
             this.cGossip.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cGossip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cGossip.ForeColor = System.Drawing.Color.Black;
-            this.cGossip.Location = new System.Drawing.Point(194, 101);
+            this.cGossip.Location = new System.Drawing.Point(187, 50);
             this.cGossip.Name = "cGossip";
             this.cGossip.Size = new System.Drawing.Size(112, 17);
             this.cGossip.TabIndex = 11;
@@ -369,7 +393,7 @@ namespace MMRando
             this.cSoS.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cSoS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cSoS.ForeColor = System.Drawing.Color.Black;
-            this.cSoS.Location = new System.Drawing.Point(163, 78);
+            this.cSoS.Location = new System.Drawing.Point(156, 27);
             this.cSoS.Name = "cSoS";
             this.cSoS.Size = new System.Drawing.Size(143, 17);
             this.cSoS.TabIndex = 10;
@@ -384,7 +408,7 @@ namespace MMRando
             this.cMixSongs.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cMixSongs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cMixSongs.ForeColor = System.Drawing.Color.Black;
-            this.cMixSongs.Location = new System.Drawing.Point(20, 78);
+            this.cMixSongs.Location = new System.Drawing.Point(13, 27);
             this.cMixSongs.Name = "cMixSongs";
             this.cMixSongs.Size = new System.Drawing.Size(122, 17);
             this.cMixSongs.TabIndex = 3;
@@ -399,7 +423,7 @@ namespace MMRando
             this.cEnemy.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cEnemy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cEnemy.ForeColor = System.Drawing.Color.Black;
-            this.cEnemy.Location = new System.Drawing.Point(141, 237);
+            this.cEnemy.Location = new System.Drawing.Point(129, 185);
             this.cEnemy.Name = "cEnemy";
             this.cEnemy.Size = new System.Drawing.Size(66, 17);
             this.cEnemy.TabIndex = 9;
@@ -414,7 +438,7 @@ namespace MMRando
             this.cDChests.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cDChests.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cDChests.ForeColor = System.Drawing.Color.Black;
-            this.cDChests.Location = new System.Drawing.Point(45, 101);
+            this.cDChests.Location = new System.Drawing.Point(38, 73);
             this.cDChests.Name = "cDChests";
             this.cDChests.Size = new System.Drawing.Size(97, 17);
             this.cDChests.TabIndex = 4;
@@ -429,7 +453,7 @@ namespace MMRando
             this.cBottled.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cBottled.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cBottled.ForeColor = System.Drawing.Color.Black;
-            this.cBottled.Location = new System.Drawing.Point(9, 147);
+            this.cBottled.Location = new System.Drawing.Point(166, 96);
             this.cBottled.Name = "cBottled";
             this.cBottled.Size = new System.Drawing.Size(133, 17);
             this.cBottled.TabIndex = 5;
@@ -444,7 +468,7 @@ namespace MMRando
             this.cDEnt.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cDEnt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cDEnt.ForeColor = System.Drawing.Color.Black;
-            this.cDEnt.Location = new System.Drawing.Point(186, 124);
+            this.cDEnt.Location = new System.Drawing.Point(179, 73);
             this.cDEnt.Name = "cDEnt";
             this.cDEnt.Size = new System.Drawing.Size(120, 17);
             this.cDEnt.TabIndex = 7;
@@ -459,7 +483,7 @@ namespace MMRando
             this.cShop.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cShop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cShop.ForeColor = System.Drawing.Color.Black;
-            this.cShop.Location = new System.Drawing.Point(64, 124);
+            this.cShop.Location = new System.Drawing.Point(57, 96);
             this.cShop.Name = "cShop";
             this.cShop.Size = new System.Drawing.Size(78, 17);
             this.cShop.TabIndex = 6;
@@ -508,7 +532,7 @@ namespace MMRando
             this.tabGimmick.Controls.Add(this.cGravity);
             this.tabGimmick.Location = new System.Drawing.Point(4, 25);
             this.tabGimmick.Name = "tabGimmick";
-            this.tabGimmick.Size = new System.Drawing.Size(346, 269);
+            this.tabGimmick.Size = new System.Drawing.Size(346, 298);
             this.tabGimmick.TabIndex = 2;
             this.tabGimmick.Text = "Gimmicks";
             this.tabGimmick.UseVisualStyleBackColor = true;
@@ -643,7 +667,7 @@ namespace MMRando
             this.tabComfort.Location = new System.Drawing.Point(4, 25);
             this.tabComfort.Name = "tabComfort";
             this.tabComfort.Padding = new System.Windows.Forms.Padding(3);
-            this.tabComfort.Size = new System.Drawing.Size(346, 269);
+            this.tabComfort.Size = new System.Drawing.Size(346, 298);
             this.tabComfort.TabIndex = 1;
             this.tabComfort.Text = "Comfort/Cosmetics";
             this.tabComfort.UseVisualStyleBackColor = true;
@@ -910,7 +934,7 @@ namespace MMRando
             // 
             // pProgress
             // 
-            this.pProgress.Location = new System.Drawing.Point(8, 448);
+            this.pProgress.Location = new System.Drawing.Point(8, 488);
             this.pProgress.Margin = new System.Windows.Forms.Padding(2);
             this.pProgress.Name = "pProgress";
             this.pProgress.Size = new System.Drawing.Size(339, 19);
@@ -925,7 +949,7 @@ namespace MMRando
             // 
             this.lStatus.AutoSize = true;
             this.lStatus.BackColor = System.Drawing.Color.Transparent;
-            this.lStatus.Location = new System.Drawing.Point(12, 429);
+            this.lStatus.Location = new System.Drawing.Point(12, 469);
             this.lStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lStatus.Name = "lStatus";
             this.lStatus.Size = new System.Drawing.Size(47, 13);
@@ -982,7 +1006,7 @@ namespace MMRando
             this.cDummy.AutoSize = true;
             this.cDummy.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cDummy.Enabled = false;
-            this.cDummy.Location = new System.Drawing.Point(262, 425);
+            this.cDummy.Location = new System.Drawing.Point(262, 465);
             this.cDummy.Name = "cDummy";
             this.cDummy.Size = new System.Drawing.Size(80, 17);
             this.cDummy.TabIndex = 9;
@@ -994,7 +1018,7 @@ namespace MMRando
             // 
             this.lHrule.AutoSize = true;
             this.lHrule.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.lHrule.Location = new System.Drawing.Point(17, 313);
+            this.lHrule.Location = new System.Drawing.Point(17, 353);
             this.lHrule.Name = "lHrule";
             this.lHrule.Size = new System.Drawing.Size(325, 13);
             this.lHrule.TabIndex = 12;
@@ -1004,7 +1028,7 @@ namespace MMRando
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label5.Location = new System.Drawing.Point(17, 410);
+            this.label5.Location = new System.Drawing.Point(17, 450);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(325, 13);
             this.label5.TabIndex = 14;
@@ -1018,7 +1042,7 @@ namespace MMRando
             // 
             this.ttOutput.Controls.Add(this.tpOutputSettings);
             this.ttOutput.Controls.Add(this.tpPatchSettings);
-            this.ttOutput.Location = new System.Drawing.Point(1, 330);
+            this.ttOutput.Location = new System.Drawing.Point(1, 370);
             this.ttOutput.Name = "ttOutput";
             this.ttOutput.SelectedIndex = 0;
             this.ttOutput.Size = new System.Drawing.Size(354, 89);
@@ -1071,12 +1095,34 @@ namespace MMRando
             this.bLoadPatch.UseVisualStyleBackColor = true;
             this.bLoadPatch.Click += new System.EventHandler(this.BLoadPatch_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cHeartPieces);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.cDEnt);
+            this.groupBox1.Controls.Add(this.cTingleMaps);
+            this.groupBox1.Controls.Add(this.cShop);
+            this.groupBox1.Controls.Add(this.cEnemy);
+            this.groupBox1.Controls.Add(this.cBottled);
+            this.groupBox1.Controls.Add(this.cDChests);
+            this.groupBox1.Controls.Add(this.cAdditional);
+            this.groupBox1.Controls.Add(this.cMixSongs);
+            this.groupBox1.Controls.Add(this.cGossip);
+            this.groupBox1.Controls.Add(this.cSoS);
+            this.groupBox1.Location = new System.Drawing.Point(13, 64);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(319, 213);
+            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Randomized Items";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(355, 476);
+            this.ClientSize = new System.Drawing.Size(355, 515);
             this.Controls.Add(this.ttOutput);
             this.Controls.Add(this.lStatus);
             this.Controls.Add(this.cDummy);
@@ -1108,6 +1154,8 @@ namespace MMRando
             this.tpOutputSettings.PerformLayout();
             this.tpPatchSettings.ResumeLayout(false);
             this.tpPatchSettings.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1196,6 +1244,9 @@ namespace MMRando
         private System.Windows.Forms.TabPage tpPatchSettings;
         private System.Windows.Forms.TextBox tPatch;
         private System.Windows.Forms.Button bLoadPatch;
+        private System.Windows.Forms.CheckBox cHeartPieces;
+        private System.Windows.Forms.CheckBox cTingleMaps;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 
