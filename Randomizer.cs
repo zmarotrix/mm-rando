@@ -580,6 +580,11 @@ namespace MMRando
         public void SeedRNG()
         {
             Random = new Random(_settings.Seed);
+
+            if (_settings.GenerateSpoilerLog)
+            {
+                Random.Next();
+            }
         }
 
         private string[] ReadRulesetFromResources()
@@ -1300,6 +1305,7 @@ namespace MMRando
                 }
 
                 itemPool.Add(i);
+                Console.WriteLine("Adding " + Items.ITEM_NAMES[i] + " to the item pool");
             }
         }
 
@@ -1417,6 +1423,8 @@ namespace MMRando
             {
                 ItemList[i].ReplacesItemId = i;
             }
+
+            ItemList[Items.ChestToGoronRaceGrotto].ReplacesItemId = Items.ChestToGoronRaceGrotto;
         }
 
         private void PreserveHeartPieces()
