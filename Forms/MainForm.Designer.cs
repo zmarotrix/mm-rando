@@ -39,6 +39,7 @@ namespace MMRando
             this.tSettings = new System.Windows.Forms.TabControl();
             this.tabROMSettings = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cDarkTheme = new System.Windows.Forms.CheckBox();
             this.cHTMLLog = new System.Windows.Forms.CheckBox();
             this.cSpoiler = new System.Windows.Forms.CheckBox();
             this.gGameOutput = new System.Windows.Forms.GroupBox();
@@ -148,7 +149,6 @@ namespace MMRando
             this.tpPatchSettings = new System.Windows.Forms.TabPage();
             this.tPatch = new System.Windows.Forms.TextBox();
             this.bLoadPatch = new System.Windows.Forms.Button();
-            this.cDarkTheme = new System.Windows.Forms.CheckBox();
             this.tSettings.SuspendLayout();
             this.tabROMSettings.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -239,6 +239,21 @@ namespace MMRando
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Spoiler Log Output";
+            // 
+            // cDarkTheme
+            // 
+            this.cDarkTheme.AutoSize = true;
+            this.cDarkTheme.BackColor = System.Drawing.Color.Transparent;
+            this.cDarkTheme.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cDarkTheme.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cDarkTheme.ForeColor = System.Drawing.Color.Black;
+            this.cDarkTheme.Location = new System.Drawing.Point(15, 68);
+            this.cDarkTheme.Name = "cDarkTheme";
+            this.cDarkTheme.Size = new System.Drawing.Size(110, 17);
+            this.cDarkTheme.TabIndex = 15;
+            this.cDarkTheme.Text = ".html Dark Theme";
+            this.cDarkTheme.UseVisualStyleBackColor = false;
+            this.cDarkTheme.CheckedChanged += new System.EventHandler(this.cDarkTheme_CheckedChanged);
             // 
             // cHTMLLog
             // 
@@ -1601,21 +1616,6 @@ namespace MMRando
             this.bLoadPatch.Text = "Load Patch...";
             this.bLoadPatch.UseVisualStyleBackColor = true;
             this.bLoadPatch.Click += new System.EventHandler(this.BLoadPatch_Click);
-            // 
-            // cDarkTheme
-            // 
-            this.cDarkTheme.AutoSize = true;
-            this.cDarkTheme.BackColor = System.Drawing.Color.Transparent;
-            this.cDarkTheme.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cDarkTheme.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cDarkTheme.ForeColor = System.Drawing.Color.Black;
-            this.cDarkTheme.Location = new System.Drawing.Point(26, 68);
-            this.cDarkTheme.Name = "cDarkTheme";
-            this.cDarkTheme.Size = new System.Drawing.Size(99, 17);
-            this.cDarkTheme.TabIndex = 15;
-            this.cDarkTheme.Text = "Dark Webpage";
-            this.cDarkTheme.UseVisualStyleBackColor = false;
-            this.cDarkTheme.CheckedChanged += new System.EventHandler(this.cDarkTheme_CheckedChanged);
             // 
             // MainForm
             // 
