@@ -39,23 +39,25 @@ namespace MMRando
             this.cUserItems = new System.Windows.Forms.CheckBox();
             this.tSettings = new System.Windows.Forms.TabControl();
             this.tabROMSettings = new System.Windows.Forms.TabPage();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.cPresets = new System.Windows.Forms.ComboBox();
+            this.tbUserLogic = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cHTMLLog = new System.Windows.Forms.CheckBox();
             this.cSpoiler = new System.Windows.Forms.CheckBox();
+            this.bLoadLogic = new System.Windows.Forms.Button();
             this.gGameOutput = new System.Windows.Forms.GroupBox();
             this.cPatch = new System.Windows.Forms.CheckBox();
             this.cN64 = new System.Windows.Forms.CheckBox();
             this.cVC = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.lMode = new System.Windows.Forms.Label();
+            this.cMode = new System.Windows.Forms.ComboBox();
             this.tabMain = new System.Windows.Forms.TabPage();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.cPresets = new System.Windows.Forms.ComboBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lCustomStartingItemAmount = new System.Windows.Forms.Label();
             this.bStartingItemEditor = new System.Windows.Forms.Button();
             this.tStartingItemList = new System.Windows.Forms.TextBox();
-            this.tbUserLogic = new System.Windows.Forms.TextBox();
-            this.bLoadLogic = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cNoStartingItems = new System.Windows.Forms.CheckBox();
             this.cDEnt = new System.Windows.Forms.CheckBox();
@@ -78,8 +80,6 @@ namespace MMRando
             this.cShop = new System.Windows.Forms.CheckBox();
             this.cAdditional = new System.Windows.Forms.CheckBox();
             this.cMoonItems = new System.Windows.Forms.CheckBox();
-            this.lMode = new System.Windows.Forms.Label();
-            this.cMode = new System.Windows.Forms.ComboBox();
             this.tabGimmick = new System.Windows.Forms.TabPage();
             this.cBlastCooldown = new System.Windows.Forms.ComboBox();
             this.lBlastMask = new System.Windows.Forms.Label();
@@ -154,10 +154,10 @@ namespace MMRando
             this.bLoadPatch = new System.Windows.Forms.Button();
             this.tSettings.SuspendLayout();
             this.tabROMSettings.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gGameOutput.SuspendLayout();
             this.tabMain.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -172,7 +172,7 @@ namespace MMRando
             // 
             // bopen
             // 
-            this.bopen.Location = new System.Drawing.Point(23, 37);
+            this.bopen.Location = new System.Drawing.Point(30, 34);
             this.bopen.Name = "bopen";
             this.bopen.Size = new System.Drawing.Size(70, 27);
             this.bopen.TabIndex = 0;
@@ -190,10 +190,10 @@ namespace MMRando
             // 
             // tROMName
             // 
-            this.tROMName.Location = new System.Drawing.Point(99, 41);
+            this.tROMName.Location = new System.Drawing.Point(106, 38);
             this.tROMName.Name = "tROMName";
             this.tROMName.ReadOnly = true;
-            this.tROMName.Size = new System.Drawing.Size(219, 20);
+            this.tROMName.Size = new System.Drawing.Size(212, 20);
             this.tROMName.TabIndex = 1;
             // 
             // cUserItems
@@ -223,15 +223,12 @@ namespace MMRando
             // 
             // tabROMSettings
             // 
-            this.tabROMSettings.Controls.Add(this.tbUserLogic);
+            this.tabROMSettings.Controls.Add(this.groupBox6);
             this.tabROMSettings.Controls.Add(this.groupBox1);
-            this.tabROMSettings.Controls.Add(this.bLoadLogic);
             this.tabROMSettings.Controls.Add(this.gGameOutput);
             this.tabROMSettings.Controls.Add(this.label1);
             this.tabROMSettings.Controls.Add(this.tROMName);
             this.tabROMSettings.Controls.Add(this.bopen);
-            this.tabROMSettings.Controls.Add(this.lMode);
-            this.tabROMSettings.Controls.Add(this.cMode);
             this.tabROMSettings.Location = new System.Drawing.Point(4, 25);
             this.tabROMSettings.Name = "tabROMSettings";
             this.tabROMSettings.Padding = new System.Windows.Forms.Padding(3);
@@ -240,30 +237,13 @@ namespace MMRando
             this.tabROMSettings.Text = "ROM Settings";
             this.tabROMSettings.UseVisualStyleBackColor = true;
             // 
-            // groupBox6
+            // tbUserLogic
             // 
-            this.groupBox6.Controls.Add(this.cPresets);
-            this.groupBox6.Location = new System.Drawing.Point(26, 13);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(288, 55);
-            this.groupBox6.TabIndex = 17;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Settings Presets";
-            // 
-            // cPresets
-            // 
-            this.cPresets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cPresets.FormattingEnabled = true;
-            this.cPresets.Items.AddRange(new object[] {
-            "Default",
-            "Casual",
-            "Full Rando",
-            "Custom"});
-            this.cPresets.Location = new System.Drawing.Point(51, 19);
-            this.cPresets.Name = "cPresets";
-            this.cPresets.Size = new System.Drawing.Size(179, 21);
-            this.cPresets.TabIndex = 18;
-            this.cPresets.SelectedIndexChanged += new System.EventHandler(this.cPresets_SelectedIndexChanged);
+            this.tbUserLogic.Location = new System.Drawing.Point(97, 43);
+            this.tbUserLogic.Name = "tbUserLogic";
+            this.tbUserLogic.ReadOnly = true;
+            this.tbUserLogic.Size = new System.Drawing.Size(219, 20);
+            this.tbUserLogic.TabIndex = 18;
             // 
             // groupBox1
             // 
@@ -305,6 +285,16 @@ namespace MMRando
             this.cSpoiler.Text = "Spoiler log .txt";
             this.cSpoiler.UseVisualStyleBackColor = false;
             this.cSpoiler.CheckedChanged += new System.EventHandler(this.cSpoiler_CheckedChanged);
+            // 
+            // bLoadLogic
+            // 
+            this.bLoadLogic.Location = new System.Drawing.Point(21, 41);
+            this.bLoadLogic.Name = "bLoadLogic";
+            this.bLoadLogic.Size = new System.Drawing.Size(73, 24);
+            this.bLoadLogic.TabIndex = 17;
+            this.bLoadLogic.Text = "Open Logic";
+            this.bLoadLogic.UseVisualStyleBackColor = true;
+            this.bLoadLogic.Click += new System.EventHandler(this.bLoadLogic_Click);
             // 
             // gGameOutput
             // 
@@ -374,12 +364,43 @@ namespace MMRando
             this.label1.TabIndex = 12;
             this.label1.Text = "ROM must be Majora\'s Mask (U) ending with \".z64\"";
             // 
+            // lMode
+            // 
+            this.lMode.AutoSize = true;
+            this.lMode.BackColor = System.Drawing.Color.Transparent;
+            this.lMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lMode.ForeColor = System.Drawing.Color.Black;
+            this.lMode.Location = new System.Drawing.Point(23, 17);
+            this.lMode.Name = "lMode";
+            this.lMode.Size = new System.Drawing.Size(68, 13);
+            this.lMode.TabIndex = 0;
+            this.lMode.Text = "Mode/Logic:";
+            // 
+            // cMode
+            // 
+            this.cMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cMode.FormattingEnabled = true;
+            this.cMode.Items.AddRange(new object[] {
+            "Casual",
+            "Glitched",
+            "Vanilla Layout",
+            "User Logic",
+            "No Logic"});
+            this.cMode.Location = new System.Drawing.Point(97, 13);
+            this.cMode.Name = "cMode";
+            this.cMode.Size = new System.Drawing.Size(219, 21);
+            this.cMode.TabIndex = 1;
+            this.cMode.SelectedIndexChanged += new System.EventHandler(this.cMode_SelectedIndexChanged);
+            // 
             // tabMain
             // 
-            this.tabMain.Controls.Add(this.groupBox6);
             this.tabMain.Controls.Add(this.groupBox4);
+            this.tabMain.Controls.Add(this.tbUserLogic);
             this.tabMain.Controls.Add(this.groupBox3);
             this.tabMain.Controls.Add(this.groupBox2);
+            this.tabMain.Controls.Add(this.lMode);
+            this.tabMain.Controls.Add(this.bLoadLogic);
+            this.tabMain.Controls.Add(this.cMode);
             this.tabMain.Location = new System.Drawing.Point(4, 25);
             this.tabMain.Name = "tabMain";
             this.tabMain.Padding = new System.Windows.Forms.Padding(3);
@@ -387,6 +408,31 @@ namespace MMRando
             this.tabMain.TabIndex = 0;
             this.tabMain.Text = "Main Settings";
             this.tabMain.UseVisualStyleBackColor = true;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.cPresets);
+            this.groupBox6.Location = new System.Drawing.Point(30, 70);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(288, 59);
+            this.groupBox6.TabIndex = 17;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Settings Presets";
+            // 
+            // cPresets
+            // 
+            this.cPresets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cPresets.FormattingEnabled = true;
+            this.cPresets.Items.AddRange(new object[] {
+            "Default",
+            "Casual",
+            "Full Rando",
+            "Custom"});
+            this.cPresets.Location = new System.Drawing.Point(51, 19);
+            this.cPresets.Name = "cPresets";
+            this.cPresets.Size = new System.Drawing.Size(179, 21);
+            this.cPresets.TabIndex = 18;
+            this.cPresets.SelectedIndexChanged += new System.EventHandler(this.cPresets_SelectedIndexChanged);
             // 
             // groupBox4
             // 
@@ -430,24 +476,6 @@ namespace MMRando
             this.tStartingItemList.TabIndex = 26;
             this.tStartingItemList.Text = "--";
             this.tStartingItemList.TextChanged += new System.EventHandler(this.tStartingItemList_TextChanged);
-            // 
-            // tbUserLogic
-            // 
-            this.tbUserLogic.Location = new System.Drawing.Point(99, 100);
-            this.tbUserLogic.Name = "tbUserLogic";
-            this.tbUserLogic.ReadOnly = true;
-            this.tbUserLogic.Size = new System.Drawing.Size(219, 20);
-            this.tbUserLogic.TabIndex = 18;
-            // 
-            // bLoadLogic
-            // 
-            this.bLoadLogic.Location = new System.Drawing.Point(23, 98);
-            this.bLoadLogic.Name = "bLoadLogic";
-            this.bLoadLogic.Size = new System.Drawing.Size(73, 24);
-            this.bLoadLogic.TabIndex = 17;
-            this.bLoadLogic.Text = "Open Logic";
-            this.bLoadLogic.UseVisualStyleBackColor = true;
-            this.bLoadLogic.Click += new System.EventHandler(this.bLoadLogic_Click);
             // 
             // groupBox3
             // 
@@ -777,34 +805,6 @@ namespace MMRando
             this.cMoonItems.UseVisualStyleBackColor = false;
             this.cMoonItems.CheckedChanged += new System.EventHandler(this.cMoonItems_CheckedChanged);
             // 
-            // lMode
-            // 
-            this.lMode.AutoSize = true;
-            this.lMode.BackColor = System.Drawing.Color.Transparent;
-            this.lMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lMode.ForeColor = System.Drawing.Color.Black;
-            this.lMode.Location = new System.Drawing.Point(25, 74);
-            this.lMode.Name = "lMode";
-            this.lMode.Size = new System.Drawing.Size(68, 13);
-            this.lMode.TabIndex = 0;
-            this.lMode.Text = "Mode/Logic:";
-            // 
-            // cMode
-            // 
-            this.cMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cMode.FormattingEnabled = true;
-            this.cMode.Items.AddRange(new object[] {
-            "Casual",
-            "Glitched",
-            "Vanilla Layout",
-            "User Logic",
-            "No Logic"});
-            this.cMode.Location = new System.Drawing.Point(99, 70);
-            this.cMode.Name = "cMode";
-            this.cMode.Size = new System.Drawing.Size(219, 21);
-            this.cMode.TabIndex = 1;
-            this.cMode.SelectedIndexChanged += new System.EventHandler(this.cMode_SelectedIndexChanged);
-            // 
             // tabGimmick
             // 
             this.tabGimmick.Controls.Add(this.cBlastCooldown);
@@ -824,7 +824,7 @@ namespace MMRando
             this.tabGimmick.Controls.Add(this.cGravity);
             this.tabGimmick.Location = new System.Drawing.Point(4, 25);
             this.tabGimmick.Name = "tabGimmick";
-            this.tabGimmick.Size = new System.Drawing.Size(864, 434);
+            this.tabGimmick.Size = new System.Drawing.Size(347, 434);
             this.tabGimmick.TabIndex = 2;
             this.tabGimmick.Text = "Gimmicks";
             this.tabGimmick.UseVisualStyleBackColor = true;
@@ -1046,7 +1046,7 @@ namespace MMRando
             this.tabComfort.Location = new System.Drawing.Point(4, 25);
             this.tabComfort.Name = "tabComfort";
             this.tabComfort.Padding = new System.Windows.Forms.Padding(3);
-            this.tabComfort.Size = new System.Drawing.Size(864, 434);
+            this.tabComfort.Size = new System.Drawing.Size(347, 434);
             this.tabComfort.TabIndex = 1;
             this.tabComfort.Text = "Comfort/Cosmetics";
             this.tabComfort.UseVisualStyleBackColor = true;
@@ -1679,12 +1679,13 @@ namespace MMRando
             this.tSettings.ResumeLayout(false);
             this.tabROMSettings.ResumeLayout(false);
             this.tabROMSettings.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.gGameOutput.ResumeLayout(false);
             this.gGameOutput.PerformLayout();
             this.tabMain.ResumeLayout(false);
+            this.tabMain.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
