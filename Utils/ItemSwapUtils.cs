@@ -11,8 +11,8 @@ namespace MMRando.Utils
     {
         const int BOTTLE_CATCH_TABLE = 0xCD7C08;
         static int cycle_repeat = 0;
-        static int cycle_repeat_count_address = 0xC72CFA;
-        static ushort cycle_repeat_count = 0x72;
+        static int cycle_repeat_count_address = 0xC72D16;
+        static ushort cycle_repeat_count = 0x74;
         static int GET_ITEM_TABLE = 0;
 
         public static void ReplaceGetItemTable(string ModsDir)
@@ -26,8 +26,12 @@ namespace MMRando.Utils
             ReadWriteUtils.WriteToROM(0xBDAEA8, (uint)last_file + 2);
             ResourceUtils.ApplyHack(ModsDir + "standing-hearts");
             ResourceUtils.ApplyHack(ModsDir + "fix-item-checks");
-            cycle_repeat = 0xC72DF2;
+            cycle_repeat = 0xC72DF4;
             SceneUtils.ResetSceneFlagMask();
+            SceneUtils.UpdateSceneFlagMask(0x5B); // red potion
+            SceneUtils.UpdateSceneFlagMask(0x91); // chateau romani
+            SceneUtils.UpdateSceneFlagMask(0x92); // milk
+            SceneUtils.UpdateSceneFlagMask(0x93); // gold dust
         }
 
         private static void InitGetBottleList()
@@ -141,25 +145,25 @@ namespace MMRando.Utils
 
             if (item == Item.ItemBottleWitch)
             {
-                ReadWriteUtils.WriteToROM(0xB49982, (ushort)getItemIndex);
+                ReadWriteUtils.WriteToROM(0xB4997E, (ushort)getItemIndex);
                 ReadWriteUtils.WriteToROM(0xC72B42, (ushort)getItemIndex);
             }
 
             if (item == Item.ItemBottleMadameAroma)
             {
-                ReadWriteUtils.WriteToROM(0xB4999A, (ushort)getItemIndex);
+                ReadWriteUtils.WriteToROM(0xB4998A, (ushort)getItemIndex);
                 ReadWriteUtils.WriteToROM(0xC72B4E, (ushort)getItemIndex);
             }
 
             if (item == Item.ItemBottleAliens)
             {
-                ReadWriteUtils.WriteToROM(0xB499A6, (ushort)getItemIndex);
+                ReadWriteUtils.WriteToROM(0xB49996, (ushort)getItemIndex);
                 ReadWriteUtils.WriteToROM(0xC72B5A, (ushort)getItemIndex);
             }
             
             if (item == Item.ItemBottleGoronRace)
             {
-                ReadWriteUtils.WriteToROM(0xB499B2, (ushort)getItemIndex);
+                ReadWriteUtils.WriteToROM(0xB499A2, (ushort)getItemIndex);
                 ReadWriteUtils.WriteToROM(0xC72B66, (ushort)getItemIndex);
             }
 

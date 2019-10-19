@@ -1131,7 +1131,7 @@ namespace MMRando
             this.cMusic.Items.AddRange(new object[] {
             "Default",
             "Random",
-            "None"});
+            "None (Risky)"});
             this.cMusic.Location = new System.Drawing.Point(128, 248);
             this.cMusic.Name = "cMusic";
             this.cMusic.Size = new System.Drawing.Size(167, 21);
@@ -1439,7 +1439,7 @@ namespace MMRando
             // 
             this.mExit.Name = "mExit";
             this.mExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.mExit.Size = new System.Drawing.Size(135, 22);
+            this.mExit.Size = new System.Drawing.Size(134, 22);
             this.mExit.Text = "Exit";
             this.mExit.Click += new System.EventHandler(this.mExit_Click);
             // 
