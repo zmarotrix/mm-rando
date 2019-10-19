@@ -18,7 +18,6 @@ namespace MMRando
         private bool _isUpdating = false;
         private string _oldSettingsString = "";
         private int _seedOld = 0;
-
         public SettingsObject _settings { get; set; }
 
         public AboutForm About { get; private set; }
@@ -26,6 +25,8 @@ namespace MMRando
         public LogicEditorForm LogicEditor { get; private set; }
         public ItemEditForm ItemEditor { get; private set; }
         public StartingItemEditForm StartingItemEditor { get; private set; }
+
+        public bool isPreset = true;
 
         private Randomizer _randomizer;
         private Builder _builder;
@@ -292,12 +293,31 @@ namespace MMRando
             _isUpdating = false;
         }
 
+        public void UpdateSettingString()
+        {
+            try
+            {
+                _settings.Update(tSString.Text);
+                UpdateCheckboxes();
+                ToggleCheckBoxes();
+                tSString.Text = _settings.ToString();
+            }
+            catch
+            {
+                tSString.Text = _oldSettingsString;
+                _settings.Update(_oldSettingsString);
+                MessageBox.Show("There was an issue updating your setting strein. Will return to old setting string.",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void UpdateCheckboxes()
         {
             cUserItems.Checked = _settings.UseCustomItemList;
             cAdditional.Checked = _settings.AddOther;
             cSoS.Checked = _settings.ExcludeSongOfSoaring;
             cSpoiler.Checked = _settings.GenerateSpoilerLog;
+            cHTMLLog.Checked = _settings.GenerateHTMLLog;
             cMixSongs.Checked = _settings.AddSongs;
             cBottled.Checked = _settings.RandomizeBottleCatchContents;
             cDChests.Checked = _settings.AddDungeonItems;
@@ -633,6 +653,17 @@ namespace MMRando
             UpdateSingleSetting(() => _settings.LogicMode = logicMode);
         }
 
+        private void cPresets_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_isUpdating)
+            {
+                return;
+            }
+
+            ApplyPreset(cPresets.SelectedIndex);
+
+        }
+
         private void cClockSpeed_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateSingleSetting(() => _settings.ClockSpeed = (ClockSpeed)cClockSpeed.SelectedIndex);
@@ -801,6 +832,148 @@ namespace MMRando
             }
         }
 
+        public void ApplyPreset(int set)
+        {
+            isPreset = true;
+
+            //_isUpdating = true;
+
+            if (set == 0) //Default
+            {
+                _settings.LogicMode = LogicMode.Casual;
+                _settings.GenerateSpoilerLog = true;
+                _settings.GenerateHTMLLog = true;
+
+                _settings.ExcludeSongOfSoaring = true;
+                _settings.AddDungeonItems = false;
+                _settings.AddMoonItems = true;
+                _settings.AddFairyRewards = true;
+                _settings.AddShopItems = true;
+                _settings.AddOther = true;
+                _settings.RandomizeBottleCatchContents = false;
+                _settings.AddNutChest = false;
+                _settings.AddCowMilk = false;
+                _settings.CrazyStartingItems = false;
+                _settings.AddSkulltulaTokens = false;
+                _settings.AddStrayFairies = false;
+                _settings.AddMundaneRewards = false;
+                _settings.RandomizeDungeonEntrances = false;
+                _settings.NoStartingItems = true;
+                _settings.AddSongs = false;
+                _settings.RandomizeEnemies = false;
+
+                _settings.DamageMode = DamageMode.Default;
+                _settings.DamageEffect = DamageEffect.Default;
+                _settings.MovementMode = MovementMode.Default;
+                _settings.FloorType = FloorType.Default;
+                _settings.ClockSpeed = ClockSpeed.Default;
+                _settings.BlastMaskCooldown = BlastMaskCooldown.Default;
+                _settings.HideClock = false;
+                
+                _settings.ShortenCutscenes = true;
+                _settings.FreeHints = true;
+                _settings.QuickTextEnabled = true;
+                _settings.FixEponaSword = true;
+                _settings.RandomizeSounds = false;
+                _settings.ClearHints = true;
+                _settings.UpdateShopAppearance = true;
+                _settings.UpdateChests = false;
+                _settings.PreventDowngrades = true;
+
+                _settings.Character = Character.LinkMM;
+                _settings.TatlColorSchema = TatlColorSchema.Default;
+                _settings.GossipHintStyle = GossipHintStyle.Competitive;
+                _settings.Music = Music.Default;
+                _settings.SpeedupBeavers = true;
+                _settings.SpeedupDampe = true;
+                _settings.SpeedupDogRace = true;
+                _settings.SpeedupLabFish = true;
+
+            }
+            else if (set == 1) //Casual
+            {
+                tSString.Text = "fzokj--16psr-lc-f";
+                UpdateSettingString();
+
+            }
+            else if (set == 2) //Full Rando
+            {
+
+                _settings.LogicMode = LogicMode.Casual;
+                _settings.GenerateSpoilerLog = true;
+                _settings.GenerateHTMLLog = true;
+
+                _settings.ExcludeSongOfSoaring = true;
+                _settings.AddDungeonItems = true;
+                _settings.AddMoonItems = true;
+                _settings.AddFairyRewards = true;
+                _settings.AddShopItems = true;
+                _settings.AddOther = true;
+                _settings.RandomizeBottleCatchContents = true;
+                _settings.AddNutChest = false;
+                _settings.AddCowMilk = true;
+                _settings.CrazyStartingItems = false;
+                _settings.AddSkulltulaTokens = true;
+                _settings.AddStrayFairies = true;
+                _settings.AddMundaneRewards = true;
+                _settings.RandomizeDungeonEntrances = true;
+                _settings.NoStartingItems = true;
+                _settings.AddSongs = true;
+                _settings.RandomizeEnemies = false;
+
+                _settings.DamageMode = DamageMode.Default;
+                _settings.DamageEffect = DamageEffect.Default;
+                _settings.MovementMode = MovementMode.Default;
+                _settings.FloorType = FloorType.Default;
+                _settings.ClockSpeed = ClockSpeed.Default;
+                _settings.BlastMaskCooldown = BlastMaskCooldown.Default;
+                _settings.HideClock = false;
+
+                _settings.ShortenCutscenes = true;
+                _settings.FreeHints = true;
+                _settings.QuickTextEnabled = true;
+                _settings.FixEponaSword = true;
+                _settings.RandomizeSounds = false;
+                _settings.ClearHints = true;
+                _settings.UpdateShopAppearance = true;
+                _settings.UpdateChests = false;
+                _settings.PreventDowngrades = true;
+
+                _settings.Character = Character.LinkMM;
+                _settings.TatlColorSchema = TatlColorSchema.Default;
+                _settings.GossipHintStyle = GossipHintStyle.Competitive;
+                _settings.Music = Music.Default;
+                _settings.SpeedupBeavers = true;
+                _settings.SpeedupDampe = true;
+                _settings.SpeedupDogRace = true;
+                _settings.SpeedupLabFish = true; 
+
+
+
+
+            }
+            _isUpdating = false;
+
+            UpdateSettingsString();
+
+            try
+            {
+                _settings.Update(tSString.Text);
+                UpdateCheckboxes();
+                ToggleCheckBoxes();
+                tSString.Text = _settings.ToString();
+            }
+            catch
+            {
+                tSString.Text = _oldSettingsString;
+                _settings.Update(_oldSettingsString);
+                MessageBox.Show("Something went wrong importing the preset!.",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return;
+        }
+
         /// <summary>
         /// Utility function that takes a function should update a single setting. 
         /// This function makes sure concurrent updates are not allowed, updates 
@@ -945,6 +1118,10 @@ namespace MMRando
             var oldSettingsString = tSString.Text;
             UpdateSettingsString();
             _oldSettingsString = oldSettingsString;
+
+
+            cPresets.SelectedIndex = 0;
+            ApplyPreset(cPresets.SelectedIndex);
         }
 
 
