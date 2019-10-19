@@ -4,7 +4,9 @@ using MMRando.Models;
 using MMRando.Models.Settings;
 using MMRando.Utils;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -306,7 +308,7 @@ namespace MMRando
             {
                 tSString.Text = _oldSettingsString;
                 _settings.Update(_oldSettingsString);
-                MessageBox.Show("There was an issue updating your setting strein. Will return to old setting string.",
+                MessageBox.Show("There was an issue updating your setting string. Returning to old Setting String.",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -834,127 +836,79 @@ namespace MMRando
 
         public void ApplyPreset(int set)
         {
-            isPreset = true;
 
-            //_isUpdating = true;
 
             if (set == 0) //Default
             {
-                _settings.LogicMode = LogicMode.Casual;
-                _settings.GenerateSpoilerLog = true;
-                _settings.GenerateHTMLLog = true;
+                tSString.Text = "zwetf--16psr--";
 
-                _settings.ExcludeSongOfSoaring = true;
-                _settings.AddDungeonItems = false;
-                _settings.AddMoonItems = true;
-                _settings.AddFairyRewards = true;
-                _settings.AddShopItems = true;
-                _settings.AddOther = true;
-                _settings.RandomizeBottleCatchContents = false;
-                _settings.AddNutChest = false;
-                _settings.AddCowMilk = false;
-                _settings.CrazyStartingItems = false;
-                _settings.AddSkulltulaTokens = false;
-                _settings.AddStrayFairies = false;
-                _settings.AddMundaneRewards = false;
-                _settings.RandomizeDungeonEntrances = false;
-                _settings.NoStartingItems = true;
-                _settings.AddSongs = false;
-                _settings.RandomizeEnemies = false;
+                ItemEditor.Text = "------------";
+                tCustomItemList.Text = ItemEditor.Text;
+                ItemEditor.UpdateChecks(ItemEditor.Text);
 
-                _settings.DamageMode = DamageMode.Default;
-                _settings.DamageEffect = DamageEffect.Default;
-                _settings.MovementMode = MovementMode.Default;
-                _settings.FloorType = FloorType.Default;
-                _settings.ClockSpeed = ClockSpeed.Default;
-                _settings.BlastMaskCooldown = BlastMaskCooldown.Default;
-                _settings.HideClock = false;
-                
-                _settings.ShortenCutscenes = true;
-                _settings.FreeHints = true;
-                _settings.QuickTextEnabled = true;
-                _settings.FixEponaSword = true;
-                _settings.RandomizeSounds = false;
-                _settings.ClearHints = true;
-                _settings.UpdateShopAppearance = true;
-                _settings.UpdateChests = false;
-                _settings.PreventDowngrades = true;
+                StartingItemEditor.Text = "--";
+                tStartingItemList.Text = StartingItemEditor.Text;
+                StartingItemEditor.UpdateChecks(StartingItemEditor.Text);
 
-                _settings.Character = Character.LinkMM;
-                _settings.TatlColorSchema = TatlColorSchema.Default;
-                _settings.GossipHintStyle = GossipHintStyle.Competitive;
-                _settings.Music = Music.Default;
-                _settings.SpeedupBeavers = true;
-                _settings.SpeedupDampe = true;
-                _settings.SpeedupDogRace = true;
-                _settings.SpeedupLabFish = true;
-
-            }
-            else if (set == 1) //Casual
-            {
-                tSString.Text = "fzokj--16psr-lc-f";
+                UpdateCustomStartingItemAmountLabel();
+                UpdateCustomItemAmountLabel();
                 UpdateSettingString();
+            }
+            else if (set == 1) //Casual 
+            {
+                tSString.Text = "fzokj-47pc-16psr-lc-f";
 
+                ItemEditor.Text = "------------";
+                tCustomItemList.Text = ItemEditor.Text;
+                ItemEditor.UpdateChecks(ItemEditor.Text);
+
+                StartingItemEditor.Text = "--";
+                tStartingItemList.Text = StartingItemEditor.Text;
+                StartingItemEditor.UpdateChecks(StartingItemEditor.Text);
+
+                UpdateCustomStartingItemAmountLabel();
+                UpdateCustomItemAmountLabel();
+                UpdateSettingString();
             }
             else if (set == 2) //Full Rando
             {
 
-                _settings.LogicMode = LogicMode.Casual;
-                _settings.GenerateSpoilerLog = true;
-                _settings.GenerateHTMLLog = true;
-
-                _settings.ExcludeSongOfSoaring = true;
-                _settings.AddDungeonItems = true;
-                _settings.AddMoonItems = true;
-                _settings.AddFairyRewards = true;
-                _settings.AddShopItems = true;
-                _settings.AddOther = true;
-                _settings.RandomizeBottleCatchContents = true;
-                _settings.AddNutChest = false;
-                _settings.AddCowMilk = true;
-                _settings.CrazyStartingItems = false;
-                _settings.AddSkulltulaTokens = true;
-                _settings.AddStrayFairies = true;
-                _settings.AddMundaneRewards = true;
-                _settings.RandomizeDungeonEntrances = true;
-                _settings.NoStartingItems = true;
-                _settings.AddSongs = true;
-                _settings.RandomizeEnemies = false;
-
-                _settings.DamageMode = DamageMode.Default;
-                _settings.DamageEffect = DamageEffect.Default;
-                _settings.MovementMode = MovementMode.Default;
-                _settings.FloorType = FloorType.Default;
-                _settings.ClockSpeed = ClockSpeed.Default;
-                _settings.BlastMaskCooldown = BlastMaskCooldown.Default;
-                _settings.HideClock = false;
-
-                _settings.ShortenCutscenes = true;
-                _settings.FreeHints = true;
-                _settings.QuickTextEnabled = true;
-                _settings.FixEponaSword = true;
-                _settings.RandomizeSounds = false;
-                _settings.ClearHints = true;
-                _settings.UpdateShopAppearance = true;
-                _settings.UpdateChests = false;
-                _settings.PreventDowngrades = true;
-
-                _settings.Character = Character.LinkMM;
-                _settings.TatlColorSchema = TatlColorSchema.Default;
-                _settings.GossipHintStyle = GossipHintStyle.Competitive;
-                _settings.Music = Music.Default;
-                _settings.SpeedupBeavers = true;
-                _settings.SpeedupDampe = true;
-                _settings.SpeedupDogRace = true;
-                _settings.SpeedupLabFish = true; 
+                tSString.Text = "yx37xv--16psr-74-f";
 
 
+                ItemEditor.Text = "------------";
+                tCustomItemList.Text = ItemEditor.Text;
+                ItemEditor.UpdateChecks(ItemEditor.Text);
+
+                StartingItemEditor.Text = "--";
+                tStartingItemList.Text = StartingItemEditor.Text;
+                StartingItemEditor.UpdateChecks(StartingItemEditor.Text);
 
 
+                UpdateCustomStartingItemAmountLabel();
+                UpdateCustomItemAmountLabel();
+                UpdateSettingString();
             }
-            _isUpdating = false;
+            else if (set == 3) //ACCESSIBLE SETTINGS
+            {
+                tSString.Text = "fz1mr-2t4w-16psr-lc-f";
 
-            UpdateSettingsString();
+                ItemEditor.Text = "-----1bffff-ffffffff-ffffffff-fe000000-6619ff-7fffffff-f37dffff-ffffffff";
+                tCustomItemList.Text = ItemEditor.Text;
+                ItemEditor.UpdateChecks(ItemEditor.Text);
+
+                StartingItemEditor.Text = "-3fc00000-";
+                tStartingItemList.Text = StartingItemEditor.Text;
+                StartingItemEditor.UpdateChecks(StartingItemEditor.Text);
+                
+
+                UpdateCustomStartingItemAmountLabel();
+                UpdateCustomItemAmountLabel();
+                UpdateSettingString();
+            }
+
+
+            _isUpdating = false;
 
             try
             {
@@ -1084,6 +1038,7 @@ namespace MMRando
             cBlastCooldown.SelectedIndex = 0;
             cMusic.SelectedIndex = 0;
             cSpoiler.Checked = true;
+            cHTMLLog.Checked = true;
             cSoS.Checked = true;
             cNoDowngrades.Checked = true;
             cShopAppearance.Checked = true;
@@ -1120,8 +1075,7 @@ namespace MMRando
             _oldSettingsString = oldSettingsString;
 
 
-            cPresets.SelectedIndex = 0;
-            ApplyPreset(cPresets.SelectedIndex);
+            
         }
 
 
@@ -1224,7 +1178,7 @@ namespace MMRando
         {
             if (_settings.LogicMode == LogicMode.UserLogic && !File.Exists(_settings.UserLogicFileName))
             {
-                MessageBox.Show("User Logic not found, please load User Logic or change logic mode.",
+                MessageBox.Show("User Logic not found or invalid, please load User Logic or change logic mode.",
                     "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }

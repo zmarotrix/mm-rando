@@ -19,7 +19,7 @@ namespace MMRando.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,6 +57,73 @@ namespace MMRando.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -version 13
+        ///- Deku Mask
+        ///
+        ///
+        ///0
+        ///0
+        ///- Hero&apos;s Bow
+        ///104
+        ///10;0,120;0,129
+        ///0
+        ///0
+        ///- Fire Arrow
+        ///107
+        ///2,92,120,433;2,93,120,433;10,92,433;10,93;92,119,433,434;92,93,119,433,435
+        ///0
+        ///0
+        ///- Ice Arrow
+        ///112,139,10,93
+        ///
+        ///0
+        ///0
+        ///- Light Arrow
+        ///116
+        ///4,120,436,433;25,119,437
+        ///0
+        ///0
+        ///- Bomb Bag (20)
+        ///
+        ///
+        ///0
+        ///0
+        ///- Magic Bean
+        ///103,0
+        ///
+        ///0
+        ///0
+        ///- Powder Keg
+        ///106,2,92,120,433
+        ///
+        ///0
+        ///0
+        ///- Pictobox
+        ///
+        ///444;447
+        ///0
+        ///0
+        ///- Lens of Truth
+        ///106
+        ///9,433;95
+        ///0
+        ///0
+        ///- Hookshot
+        ///111
+        ///92,120;0,92;10,120;0,10
+        ///0
+        ///0
+        ///- Great Fairy Magic Meter
+        ///346
+        ///0;9 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ACCESSIBLE {
+            get {
+                return ResourceManager.GetString("ACCESSIBLE", resourceCulture);
             }
         }
         
@@ -126,7 +193,13 @@ namespace MMRando.Properties {
         ///-skulltula
         ///0024
         ///0020
-        ///003f,007f [rest of string was truncated]&quot;;.
+        ///003f,007f,0004
+        ///3
+        ///0
+        ///1b,27,28,49
+        ///-death armos - crash, link to paths?
+        ///-002d
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ENEMIES {
             get {
@@ -193,7 +266,11 @@ namespace MMRando.Properties {
         ///0
         ///- Great Fairy Magic Meter
         ///346
-        ///0;9 [rest of string was truncated]&quot;;.
+        ///0;92;93
+        ///0
+        ///0
+        ///- Great Fairy Spin Attack
+        ///0,103,347,348,349,350,3 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string REQ_CASUAL {
             get {
@@ -245,7 +322,10 @@ namespace MMRando.Properties {
         ///0
         ///- Pictobox
         ///436
-        ///16; [rest of string was truncated]&quot;;.
+        ///16;147;156;162;165;155;418
+        ///0
+        ///0
+        ///- Lens of Truth [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string REQ_GLITCH {
             get {
@@ -330,7 +410,20 @@ namespace MMRando.Properties {
         ///2
         ///19
         ///7
-        ///mm-w [rest of string was truncated]&quot;;.
+        ///mm-woodfalltemple
+        ///2
+        ///14
+        ///1c
+        ///mm-clocktower
+        ///3
+        ///17
+        ///5
+        ///mm-guruguru
+        ///3
+        ///5
+        ///2e
+        ///mm-milkbar
+        ///3,4 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SEQS {
             get {
