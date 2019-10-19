@@ -662,7 +662,7 @@ namespace MMRando
                 return;
             }
 
-            ApplyPreset(cPresets.SelectedIndex);
+            ApplyPreset((Presets) cPresets.SelectedIndex);
 
         }
 
@@ -834,11 +834,11 @@ namespace MMRando
             }
         }
 
-        public void ApplyPreset(int set)
+        public void ApplyPreset(Presets set)
         {
 
 
-            if (set == 0) //Default
+            if (set == Presets.Default) //Default
             {
                 tSString.Text = "zwetf--16psr--";
 
@@ -854,9 +854,9 @@ namespace MMRando
                 UpdateCustomItemAmountLabel();
                 UpdateSettingString();
             }
-            else if (set == 1) //Casual 
+            else if (set == Presets.Casual) //Casual 
             {
-                tSString.Text = "fzokj-47pc-16psr-lc-f";
+                tSString.Text = "fzokj--16psr-lc-f";
 
                 ItemEditor.Text = "------------";
                 tCustomItemList.Text = ItemEditor.Text;
@@ -870,7 +870,7 @@ namespace MMRando
                 UpdateCustomItemAmountLabel();
                 UpdateSettingString();
             }
-            else if (set == 2) //Full Rando
+            else if (set == Presets.FullRando) //Full Rando
             {
 
                 tSString.Text = "yx37xv--16psr-74-f";
@@ -884,12 +884,11 @@ namespace MMRando
                 tStartingItemList.Text = StartingItemEditor.Text;
                 StartingItemEditor.UpdateChecks(StartingItemEditor.Text);
 
-
                 UpdateCustomStartingItemAmountLabel();
                 UpdateCustomItemAmountLabel();
                 UpdateSettingString();
             }
-            else if (set == 3) //ACCESSIBLE SETTINGS
+            else if (set == Presets.Accessible) //ACCESSIBLE SETTINGS
             {
                 tSString.Text = "fz1mr-2t4w-16psr-lc-f";
 
@@ -901,7 +900,6 @@ namespace MMRando
                 tStartingItemList.Text = StartingItemEditor.Text;
                 StartingItemEditor.UpdateChecks(StartingItemEditor.Text);
                 
-
                 UpdateCustomStartingItemAmountLabel();
                 UpdateCustomItemAmountLabel();
                 UpdateSettingString();
