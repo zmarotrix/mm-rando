@@ -73,6 +73,7 @@ namespace MMRando
             {
                 ReadPreset(ROOT + initSettingsFilename + PresetExt);
                 tbPreset.Text = "";
+                _settings.UserPresetFileName = "";
                 cPresets.SelectedIndex = (int)Presets.Custom;
             }
             PresetInit = false;
@@ -211,7 +212,7 @@ namespace MMRando
         {
             if (_settings.GenerateROM && !ValidateInputFile()) return;
 
-            if (_settings.LogicMode == LogicMode.UserLogic && !ValidateLogicFile()) return;
+            if ((_settings.LogicMode == LogicMode.UserLogic || _settings.LogicMode == LogicMode.Preset) && !ValidateLogicFile()) return;
 
             saveROM.FileName = !string.IsNullOrWhiteSpace(_settings.InputPatchFilename)
                 ? Path.ChangeExtension(Path.GetFileName(_settings.InputPatchFilename), "z64")
@@ -706,15 +707,43 @@ namespace MMRando
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
-            StartClose();
-            
+
+            if(!StartClose())
+            {
+                e.Cancel = true;
+            }
         }
 
-        private void StartClose()
+        private bool StartClose()
         {
-            if(_settings.LogicMode != LogicMode.UserLogic && _settings.LogicMode != LogicMode.Preset)
+            if (_settings.LogicMode == LogicMode.Preset)
             {
-                WritePreset(ROOT + "settings");
+                if (_settings.UserPresetFileName != null && File.Exists(_settings.UserPresetFileName))
+                {
+                    WritePreset(ROOT + "settings");
+                    return true;
+                }
+            }
+
+            if (_settings.LogicMode == LogicMode.UserLogic)
+            {
+                if (_settings.UserLogicFileName != null && File.Exists(_settings.UserLogicFileName))
+                {
+                   WritePreset(ROOT + "settings");
+                   return true;
+                }
+            }
+
+            var confirmResult = MessageBox.Show("Preset Logic mode selected or User Logic mode selected without Logic Loaded. Closing now will not save your settings, are you sure you want to close?",
+                                     "Are you sure?",
+                                     MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -1223,6 +1252,14 @@ namespace MMRando
                     "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
+
+            if (_settings.LogicMode == LogicMode.Preset && !File.Exists(_settings.UserPresetFileName))
+            {
+                MessageBox.Show("Preset Logic mode selected with no User Preset file selected. PLease change your logic mode!",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
             return true;
         }
 
