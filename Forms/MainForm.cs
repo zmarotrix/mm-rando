@@ -842,13 +842,11 @@ namespace MMRando
             {
                 tSString.Text = "zwetf--16psr--";
 
-                ItemEditor.Text = "------------";
-                tCustomItemList.Text = ItemEditor.Text;
-                ItemEditor.UpdateChecks(ItemEditor.Text);
+                tCustomItemList.Text = "------------";
+                ItemEditor.UpdateChecks(tCustomItemList.Text);
 
-                StartingItemEditor.Text = "--";
-                tStartingItemList.Text = StartingItemEditor.Text;
-                StartingItemEditor.UpdateChecks(StartingItemEditor.Text);
+                tStartingItemList.Text = "--";
+                StartingItemEditor.UpdateChecks(tStartingItemList.Text);
 
                 UpdateCustomStartingItemAmountLabel();
                 UpdateCustomItemAmountLabel();
@@ -858,13 +856,11 @@ namespace MMRando
             {
                 tSString.Text = "fzokj--16psr-lc-f";
 
-                ItemEditor.Text = "------------";
-                tCustomItemList.Text = ItemEditor.Text;
-                ItemEditor.UpdateChecks(ItemEditor.Text);
+                tCustomItemList.Text = "------------";
+                ItemEditor.UpdateChecks(tCustomItemList.Text);
 
-                StartingItemEditor.Text = "--";
-                tStartingItemList.Text = StartingItemEditor.Text;
-                StartingItemEditor.UpdateChecks(StartingItemEditor.Text);
+                tStartingItemList.Text = "--";
+                StartingItemEditor.UpdateChecks(tStartingItemList.Text);
 
                 UpdateCustomStartingItemAmountLabel();
                 UpdateCustomItemAmountLabel();
@@ -876,13 +872,11 @@ namespace MMRando
                 tSString.Text = "yx37xv--16psr-74-f";
 
 
-                ItemEditor.Text = "------------";
-                tCustomItemList.Text = ItemEditor.Text;
-                ItemEditor.UpdateChecks(ItemEditor.Text);
+                tCustomItemList.Text = "------------";
+                ItemEditor.UpdateChecks(tCustomItemList.Text);
 
-                StartingItemEditor.Text = "--";
-                tStartingItemList.Text = StartingItemEditor.Text;
-                StartingItemEditor.UpdateChecks(StartingItemEditor.Text);
+                tStartingItemList.Text = "--";
+                StartingItemEditor.UpdateChecks(tStartingItemList.Text);
 
                 UpdateCustomStartingItemAmountLabel();
                 UpdateCustomItemAmountLabel();
@@ -892,13 +886,11 @@ namespace MMRando
             {
                 tSString.Text = "fz1mr-2t4w-16psr-lc-f";
 
-                ItemEditor.Text = "-----1bffff-ffffffff-ffffffff-fe000000-6619ff-7fffffff-f37dffff-ffffffff";
-                tCustomItemList.Text = ItemEditor.Text;
-                ItemEditor.UpdateChecks(ItemEditor.Text);
+                tCustomItemList.Text = "-----1bffff-ffffffff-ffffffff-fe000000-6619ff-7fffffff-f37dffff-ffffffff";
+                ItemEditor.UpdateChecks(tCustomItemList.Text);
 
-                StartingItemEditor.Text = "-3fc00000-";
-                tStartingItemList.Text = StartingItemEditor.Text;
-                StartingItemEditor.UpdateChecks(StartingItemEditor.Text);
+                tStartingItemList.Text = "-3fc00000-";
+                StartingItemEditor.UpdateChecks(tStartingItemList.Text);
                 
                 UpdateCustomStartingItemAmountLabel();
                 UpdateCustomItemAmountLabel();
