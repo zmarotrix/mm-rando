@@ -30,6 +30,7 @@ namespace MMRando
 
         public readonly string ROOT = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\";
         public readonly string PresetExt = ".mmrsp";
+        public readonly string initSettingsFilename = "settings";
         public bool PresetInit = true;
 
         private Randomizer _randomizer;
@@ -68,9 +69,9 @@ namespace MMRando
 
             Text = AssemblyVersion;
 
-            if (File.Exists(ROOT + "preset_settings" + PresetExt))
+            if (File.Exists(ROOT + initSettingsFilename + PresetExt))
             {
-                ReadPreset(ROOT + "preset_settings" + PresetExt);
+                ReadPreset(ROOT + initSettingsFilename + PresetExt);
                 tbPreset.Text = "";
                 cPresets.SelectedIndex = (int)Presets.Custom;
             }
@@ -711,7 +712,10 @@ namespace MMRando
 
         private void StartClose()
         {
-            WritePreset(ROOT + "settings");
+            if(_settings.LogicMode != LogicMode.UserLogic && _settings.LogicMode != LogicMode.Preset)
+            {
+                WritePreset(ROOT + "settings");
+            }
         }
 
         private void mAbout_Click(object sender, EventArgs e)
@@ -1199,7 +1203,7 @@ namespace MMRando
 
                 if (PresetInit)
                 {
-                    File.Delete(ROOT + "preset_settings" + PresetExt);
+                    File.Delete(ROOT + initSettingsFilename + PresetExt);
                 }
                 else
                 {
@@ -1242,9 +1246,20 @@ namespace MMRando
 
         private void bSavePreset_Click(object sender, EventArgs e)
         {
-            if (savePreset.ShowDialog() == DialogResult.OK)
+            if (_settings.LogicMode != LogicMode.Preset)
             {
-                WritePreset(savePreset.FileName);
+                if (_settings.LogicMode == LogicMode.UserLogic && ValidateLogicFile())
+                {
+                    if (savePreset.ShowDialog() == DialogResult.OK)
+                    {
+                        WritePreset(savePreset.FileName);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Cannot save Preset Logic Mode in a Preset! Change your logic mode!",
+"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -1312,6 +1327,31 @@ namespace MMRando
             PresetFile.WriteLine(tSString.Text);
             PresetFile.WriteLine(tCustomItemList.Text);
             PresetFile.WriteLine(tStartingItemList.Text);
+
+            if(_settings.LogicMode == LogicMode.UserLogic)
+            {
+                if(_settings.UserLogicFileName != null && File.Exists(_settings.UserLogicFileName))
+                {
+                    PresetFile.WriteLine("LOGIC");
+
+                    string[] lines = null;
+                    using (StreamReader Req = new StreamReader(File.Open(_settings.UserLogicFileName, FileMode.Open)))
+                    {
+                        lines = Req.ReadToEnd().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+                    }
+                    for (int i = 0; i < lines.Length - 1; i++)
+                    {
+                        PresetFile.WriteLine(lines[i]);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Must load user logic to save user logic presets.",
+    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    PresetFile.Dispose();
+                    PresetFile.Close();
+                }
+            }
             PresetFile.Close();
         }
 
@@ -1342,6 +1382,13 @@ namespace MMRando
                     UpdateCustomStartingItemAmountLabel();
                     UpdateCustomItemAmountLabel();
                     UpdateSettingString();
+                    
+                    if(lines[4].Equals("LOGIC"))
+                    {
+                        _settings.LogicMode = LogicMode.Preset;
+                        cMode.SelectedIndex = (int)LogicMode.Preset;
+                    }
+
                 }
             }
         }

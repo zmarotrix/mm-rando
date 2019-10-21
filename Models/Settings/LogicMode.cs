@@ -8,5 +8,6 @@
         Vanilla,
         UserLogic,
         NoLogic,
+        Preset,
     }
 }
