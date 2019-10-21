@@ -28,7 +28,8 @@ namespace MMRando
         public ItemEditForm ItemEditor { get; private set; }
         public StartingItemEditForm StartingItemEditor { get; private set; }
 
-        public bool isPreset = true;
+        public string ROOT = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\";
+        public const string PresetExt = ".mmrsp";
 
         private Randomizer _randomizer;
         private Builder _builder;
@@ -65,6 +66,11 @@ namespace MMRando
 
 
             Text = AssemblyVersion;
+
+            if (File.Exists(ROOT + "preset_settings" + PresetExt))
+            {
+                ReadPreset(ROOT + "preset_settings" + PresetExt);
+            }
         }
 
         private void InitializeTooltips()
@@ -689,7 +695,23 @@ namespace MMRando
 
         private void mExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            StartClose();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            StartClose();
+            
+        }
+
+        private void StartClose()
+        {
+            if(!File.Exists(ROOT + "preset_settings" + PresetExt))
+            {
+                WritePreset(ROOT + "preset_settings");
+            }
+
         }
 
         private void mAbout_Click(object sender, EventArgs e)
@@ -836,9 +858,8 @@ namespace MMRando
 
         public void ApplyPreset(Presets set)
         {
-
-
-            if (set == Presets.Casual) 
+            tbPreset.Text = "";
+            if (set == Presets.Casual)
             {
                 tSString.Text = "zwetf--16psr--";
 
@@ -852,7 +873,7 @@ namespace MMRando
                 UpdateCustomItemAmountLabel();
                 UpdateSettingString();
             }
-            else if (set == Presets.Regular) 
+            else if (set == Presets.Regular)
             {
                 tSString.Text = "fz1tv-2t50-2hwg0-a10jk-f";
 
@@ -866,7 +887,7 @@ namespace MMRando
                 UpdateCustomItemAmountLabel();
                 UpdateSettingString();
             }
-            else if (set == Presets.Sanitys) 
+            else if (set == Presets.Sanitys)
             {
                 tSString.Text = "fz1tv-2t50-2hwg0-a10jk-f";
 
@@ -890,10 +911,14 @@ namespace MMRando
 
                 tStartingItemList.Text = "-3fc00000-";
                 StartingItemEditor.UpdateChecks(tStartingItemList.Text);
-                
+
                 UpdateCustomStartingItemAmountLabel();
                 UpdateCustomItemAmountLabel();
                 UpdateSettingString();
+            }
+            else if (set == Presets.Custom)
+            {
+                //I actually don't have to do anything here...
             }
 
 
@@ -1062,9 +1087,6 @@ namespace MMRando
             var oldSettingsString = tSString.Text;
             UpdateSettingsString();
             _oldSettingsString = oldSettingsString;
-
-
-            
         }
 
 
@@ -1163,6 +1185,21 @@ namespace MMRando
             return true;
         }
 
+        private bool ValidatePresetFile(String[] lines)
+        {
+            if (lines.Length > 0 && (lines[0].Equals("MMR Preset File [" + AssemblyVersion + "]") || lines[0].Equals("MMR Preset File [dev]")))
+            {
+                return true;
+            }
+            else
+            {
+                tbPreset.Text = "";
+                MessageBox.Show("File is not a valid preset file or outdated! Please double check file. \n \n" + _settings.UserPresetFileName,
+                       "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            return false;
+        }
+
         private bool ValidateLogicFile()
         {
             if (_settings.LogicMode == LogicMode.UserLogic && !File.Exists(_settings.UserLogicFileName))
@@ -1181,6 +1218,23 @@ namespace MMRando
             openPatch.ShowDialog();
             _settings.InputPatchFilename = openPatch.FileName;
             tPatch.Text = _settings.InputPatchFilename;
+        }
+
+        private void bLoadPreset_Click(object sender, EventArgs e)
+        {
+            if (openPreset.ShowDialog() == DialogResult.OK)
+            {
+                _settings.UserPresetFileName = openPreset.FileName;
+                ReadPreset(_settings.UserPresetFileName);
+            }
+        }
+
+        private void bSavePreset_Click(object sender, EventArgs e)
+        {
+            if (savePreset.ShowDialog() == DialogResult.OK)
+            {
+                WritePreset(savePreset.FileName);
+            }
         }
 
         private void ttOutput_Changed(object sender, EventArgs e)
@@ -1237,5 +1291,55 @@ namespace MMRando
                 tPatch.Text = null;
             }
         }
+
+
+
+        private void WritePreset(string filename)
+        {
+            StreamWriter PresetFile = new StreamWriter(File.Open(filename + PresetExt, FileMode.Create));
+            PresetFile.WriteLine("MMR Preset File [" + AssemblyVersion + "]");
+            PresetFile.WriteLine(tSString.Text);
+            PresetFile.WriteLine(tCustomItemList.Text);
+            PresetFile.WriteLine(tStartingItemList.Text);
+            PresetFile.Close();
+        }
+
+
+        private void ReadPreset(string filename)
+        {
+            if (File.Exists(filename))
+            {
+                string[] lines = null;
+                using (StreamReader Req = new StreamReader(File.Open(filename, FileMode.Open)))
+                {
+                    lines = Req.ReadToEnd().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+                }
+
+                if (ValidatePresetFile(lines))
+                {
+                    cPresets.SelectedIndex = (int)Presets.Custom;
+                    tbPreset.Text = Path.GetFileNameWithoutExtension(filename);
+
+                    tSString.Text = lines[1];
+
+                    tCustomItemList.Text = lines[2];
+                    ItemEditor.UpdateChecks(tCustomItemList.Text);
+
+                    tStartingItemList.Text = lines[3];
+                    StartingItemEditor.UpdateChecks(tStartingItemList.Text);
+
+                    UpdateCustomStartingItemAmountLabel();
+                    UpdateCustomItemAmountLabel();
+                    UpdateSettingString();
+                }
+            }
+        }
+
+        private void MaroDebug(string message)
+        {
+            MessageBox.Show(message, "Debug", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+
     }
 }
