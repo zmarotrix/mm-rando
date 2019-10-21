@@ -838,7 +838,7 @@ namespace MMRando
         {
 
 
-            if (set == Presets.Default) //Default
+            if (set == Presets.Casual) 
             {
                 tSString.Text = "zwetf--16psr--";
 
@@ -852,30 +852,29 @@ namespace MMRando
                 UpdateCustomItemAmountLabel();
                 UpdateSettingString();
             }
-            else if (set == Presets.Casual) //Casual 
+            else if (set == Presets.Regular) 
             {
-                tSString.Text = "fzokj--16psr-lc-f";
+                tSString.Text = "fz1tv-2t50-2hwg0-a10jk-f";
 
-                tCustomItemList.Text = "------------";
+                tCustomItemList.Text = "101e0d-f0000000----1fffff-ffffffff-ffffffff-fe007fff-f06619ff-bfffffff-f378ffff-ffffffff";
                 ItemEditor.UpdateChecks(tCustomItemList.Text);
 
-                tStartingItemList.Text = "--";
+                tStartingItemList.Text = "-4000-";
                 StartingItemEditor.UpdateChecks(tStartingItemList.Text);
 
                 UpdateCustomStartingItemAmountLabel();
                 UpdateCustomItemAmountLabel();
                 UpdateSettingString();
             }
-            else if (set == Presets.FullRando) //Full Rando
+            else if (set == Presets.Sanitys) 
             {
+                tSString.Text = "fz1tv-2t50-2hwg0-a10jk-f";
 
-                tSString.Text = "yx37xv--16psr-74-f";
 
-
-                tCustomItemList.Text = "------------";
+                tCustomItemList.Text = "101e0d-f7ffffff-ffffffff-ffffffff-ffffffff-ec1fffff-ffffffff-ffffffff-fe007fff-f06619ff-bfffffff-f378ffff-ffffffff";
                 ItemEditor.UpdateChecks(tCustomItemList.Text);
 
-                tStartingItemList.Text = "--";
+                tStartingItemList.Text = "-4000-";
                 StartingItemEditor.UpdateChecks(tStartingItemList.Text);
 
                 UpdateCustomStartingItemAmountLabel();
