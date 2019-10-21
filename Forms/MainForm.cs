@@ -28,8 +28,9 @@ namespace MMRando
         public ItemEditForm ItemEditor { get; private set; }
         public StartingItemEditForm StartingItemEditor { get; private set; }
 
-        public string ROOT = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\";
-        public const string PresetExt = ".mmrsp";
+        public readonly string ROOT = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\";
+        public readonly string PresetExt = ".mmrsp";
+        public bool PresetInit = true;
 
         private Randomizer _randomizer;
         private Builder _builder;
@@ -70,7 +71,10 @@ namespace MMRando
             if (File.Exists(ROOT + "preset_settings" + PresetExt))
             {
                 ReadPreset(ROOT + "preset_settings" + PresetExt);
+                tbPreset.Text = "";
+                cPresets.SelectedIndex = (int)Presets.Custom;
             }
+            PresetInit = false;
         }
 
         private void InitializeTooltips()
@@ -707,11 +711,7 @@ namespace MMRando
 
         private void StartClose()
         {
-            if(!File.Exists(ROOT + "preset_settings" + PresetExt))
-            {
-                WritePreset(ROOT + "preset_settings");
-            }
-
+            WritePreset(ROOT + "settings");
         }
 
         private void mAbout_Click(object sender, EventArgs e)
@@ -1194,8 +1194,17 @@ namespace MMRando
             else
             {
                 tbPreset.Text = "";
-                MessageBox.Show("File is not a valid preset file or outdated! Please double check file. \n \n" + _settings.UserPresetFileName,
+
+                if (PresetInit)
+                {
+                    File.Delete(ROOT + "preset_settings" + PresetExt);
+                }
+                else
+                {
+                    MessageBox.Show("File is not a valid preset file or outdated! Please double check file. \n \n" + _settings.UserPresetFileName,
                        "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                
             }
             return false;
         }

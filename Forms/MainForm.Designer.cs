@@ -35,11 +35,16 @@ namespace MMRando
             this.bopen = new System.Windows.Forms.Button();
             this.openROM = new System.Windows.Forms.OpenFileDialog();
             this.openLogic = new System.Windows.Forms.OpenFileDialog();
+            this.openPreset = new System.Windows.Forms.OpenFileDialog();
+            this.savePreset = new System.Windows.Forms.SaveFileDialog();
             this.tROMName = new System.Windows.Forms.TextBox();
             this.cUserItems = new System.Windows.Forms.CheckBox();
             this.tSettings = new System.Windows.Forms.TabControl();
             this.tabROMSettings = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.bSavePreset = new System.Windows.Forms.Button();
+            this.tbPreset = new System.Windows.Forms.TextBox();
+            this.bLoadPreset = new System.Windows.Forms.Button();
             this.cPresets = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cHTMLLog = new System.Windows.Forms.CheckBox();
@@ -239,26 +244,58 @@ namespace MMRando
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.bSavePreset);
+            this.groupBox6.Controls.Add(this.tbPreset);
+            this.groupBox6.Controls.Add(this.bLoadPreset);
             this.groupBox6.Controls.Add(this.cPresets);
             this.groupBox6.Location = new System.Drawing.Point(30, 70);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(288, 59);
+            this.groupBox6.Size = new System.Drawing.Size(288, 113);
             this.groupBox6.TabIndex = 17;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Settings Presets";
+            // 
+            // bSavePreset
+            // 
+            this.bSavePreset.Location = new System.Drawing.Point(147, 45);
+            this.bSavePreset.Name = "bSavePreset";
+            this.bSavePreset.Size = new System.Drawing.Size(135, 29);
+            this.bSavePreset.TabIndex = 19;
+            this.bSavePreset.Text = "Save Preset...";
+            this.bSavePreset.UseVisualStyleBackColor = true;
+            this.bSavePreset.Click += new System.EventHandler(this.bSavePreset_Click);
+            // 
+            // tbPreset
+            // 
+            this.tbPreset.Location = new System.Drawing.Point(7, 80);
+            this.tbPreset.Name = "tbPreset";
+            this.tbPreset.ReadOnly = true;
+            this.tbPreset.Size = new System.Drawing.Size(275, 20);
+            this.tbPreset.TabIndex = 18;
+            // 
+            // bLoadPreset
+            // 
+            this.bLoadPreset.Location = new System.Drawing.Point(6, 45);
+            this.bLoadPreset.Name = "bLoadPreset";
+            this.bLoadPreset.Size = new System.Drawing.Size(135, 29);
+            this.bLoadPreset.TabIndex = 8;
+            this.bLoadPreset.Text = "Load Preset...";
+            this.bLoadPreset.UseVisualStyleBackColor = true;
+            this.bLoadPreset.Click += new System.EventHandler(this.bLoadPreset_Click);
             // 
             // cPresets
             // 
             this.cPresets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cPresets.FormattingEnabled = true;
             this.cPresets.Items.AddRange(new object[] {
-            "Default",
             "Casual",
-            "Full Rando",
-            "Accessible"});
-            this.cPresets.Location = new System.Drawing.Point(51, 19);
+            "Regular",
+            "Sanitys",
+            "Accessible",
+            "Custom"});
+            this.cPresets.Location = new System.Drawing.Point(6, 19);
             this.cPresets.Name = "cPresets";
-            this.cPresets.Size = new System.Drawing.Size(179, 21);
+            this.cPresets.Size = new System.Drawing.Size(276, 21);
             this.cPresets.TabIndex = 18;
             this.cPresets.SelectedIndexChanged += new System.EventHandler(this.cPresets_SelectedIndexChanged);
             // 
@@ -266,7 +303,7 @@ namespace MMRando
             // 
             this.groupBox1.Controls.Add(this.cHTMLLog);
             this.groupBox1.Controls.Add(this.cSpoiler);
-            this.groupBox1.Location = new System.Drawing.Point(177, 135);
+            this.groupBox1.Location = new System.Drawing.Point(177, 187);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(141, 107);
             this.groupBox1.TabIndex = 17;
@@ -308,7 +345,7 @@ namespace MMRando
             this.gGameOutput.Controls.Add(this.cPatch);
             this.gGameOutput.Controls.Add(this.cN64);
             this.gGameOutput.Controls.Add(this.cVC);
-            this.gGameOutput.Location = new System.Drawing.Point(30, 135);
+            this.gGameOutput.Location = new System.Drawing.Point(30, 187);
             this.gGameOutput.Name = "gGameOutput";
             this.gGameOutput.Size = new System.Drawing.Size(141, 107);
             this.gGameOutput.TabIndex = 16;
@@ -1681,6 +1718,7 @@ namespace MMRando
             this.tabROMSettings.ResumeLayout(false);
             this.tabROMSettings.PerformLayout();
             this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.gGameOutput.ResumeLayout(false);
@@ -1717,10 +1755,12 @@ namespace MMRando
         private System.Windows.Forms.OpenFileDialog openROM;
         private System.Windows.Forms.OpenFileDialog openPatch;
         private System.Windows.Forms.OpenFileDialog openLogic;
+        private System.Windows.Forms.OpenFileDialog openPreset;
         private System.Windows.Forms.TextBox tROMName;
         private System.Windows.Forms.ComboBox cMode;
         private System.Windows.Forms.Label lMode;
         private System.Windows.Forms.SaveFileDialog saveROM;
+        private System.Windows.Forms.SaveFileDialog savePreset;
         private System.Windows.Forms.ComboBox cTatl;
         private System.Windows.Forms.Label lTatl;
         private System.Windows.Forms.ComboBox cLink;
@@ -1833,6 +1873,9 @@ namespace MMRando
         private System.Windows.Forms.CheckBox cSkipBeaver;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.ComboBox cPresets;
+        private System.Windows.Forms.TextBox tbPreset;
+        private System.Windows.Forms.Button bLoadPreset;
+        private System.Windows.Forms.Button bSavePreset;
     }
 }
 

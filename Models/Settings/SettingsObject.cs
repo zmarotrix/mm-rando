@@ -37,6 +37,11 @@ namespace MMRando.Models.Settings
         public string UserLogicFileName { get; set; }
 
         /// <summary>
+        /// Filepath to the input preset file
+        /// </summary>
+        public string UserPresetFileName { get; set; }
+
+        /// <summary>
         /// Default Filename for the output ROM
         /// </summary>
         public string DefaultOutputROMFilename
