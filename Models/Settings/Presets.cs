@@ -2,11 +2,10 @@
 {
     public enum Presets
     {
+        Default,
         Casual,
-        Regular,
-        Sanitys,
+        FullRando,
         Accessible,
         Custom,
     }
 }
-

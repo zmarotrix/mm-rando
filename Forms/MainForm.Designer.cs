@@ -288,9 +288,9 @@ namespace MMRando
             this.cPresets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cPresets.FormattingEnabled = true;
             this.cPresets.Items.AddRange(new object[] {
+            "Default",
             "Casual",
-            "Regular",
-            "Sanitys",
+            "Full Rando",
             "Accessible",
             "Custom"});
             this.cPresets.Location = new System.Drawing.Point(6, 19);
