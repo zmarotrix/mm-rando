@@ -32,6 +32,7 @@ namespace MMRando
         public const string PresetExt = ".cfg";
         public const string initSettingsFilename = "settings";
         public bool PresetInit = true;
+        public bool PresetHasLogic = false;
 
         private Randomizer _randomizer;
         private Builder _builder;
@@ -1276,10 +1277,10 @@ namespace MMRando
                 return false;
             }
 
-            if (_settings.LogicMode == LogicMode.Preset && !File.Exists(_settings.UserPresetFileName))
+            if (_settings.LogicMode == LogicMode.Preset && (!File.Exists(_settings.UserPresetFileName) || !PresetHasLogic))
             {
-                MessageBox.Show("Preset Logic mode selected with no User Preset file selected. PLease change your logic mode!",
-                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"Preset Logic mode selected but Preset file has no logic or does not exist!", "Warning",
+    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
@@ -1420,6 +1421,7 @@ namespace MMRando
         {
             if (File.Exists(filename))
             {
+                PresetHasLogic = false;
                 string[] lines = null;
                 using (StreamReader Req = new StreamReader(File.Open(filename, FileMode.Open)))
                 {
@@ -1445,6 +1447,7 @@ namespace MMRando
                     
                     if(lines.Length > 4 && lines[4].Equals("LOGIC"))
                     {
+                        PresetHasLogic = true;
                         _settings.LogicMode = LogicMode.Preset;
                         cMode.SelectedIndex = (int)LogicMode.Preset;
                     }
