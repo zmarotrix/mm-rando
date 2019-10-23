@@ -28,9 +28,9 @@ namespace MMRando
         public ItemEditForm ItemEditor { get; private set; }
         public StartingItemEditForm StartingItemEditor { get; private set; }
 
-        public readonly string ROOT = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\";
-        public readonly string PresetExt = ".mmrsp";
-        public readonly string initSettingsFilename = "settings";
+
+        public const string PresetExt = ".cfg";
+        public const string initSettingsFilename = "settings";
         public bool PresetInit = true;
 
         private Randomizer _randomizer;
@@ -69,9 +69,9 @@ namespace MMRando
 
             Text = AssemblyVersion;
 
-            if (File.Exists(ROOT + initSettingsFilename + PresetExt))
+            if (File.Exists(".\\" + initSettingsFilename + PresetExt))
             {
-                ReadPreset(ROOT + initSettingsFilename + PresetExt);
+                ReadPreset(".\\" + initSettingsFilename + PresetExt);
                 tbPreset.Text = "";
                 _settings.UserPresetFileName = "";
                 cPresets.SelectedIndex = (int)Presets.Custom;
@@ -320,6 +320,8 @@ namespace MMRando
             {
                 tSString.Text = _oldSettingsString;
                 _settings.Update(_oldSettingsString);
+                UpdateCheckboxes();
+                ToggleCheckBoxes();
                 MessageBox.Show("There was an issue updating your setting string. Returning to old Setting String.",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -720,8 +722,22 @@ namespace MMRando
             {
                 if (_settings.UserPresetFileName != null && File.Exists(_settings.UserPresetFileName))
                 {
-                    WritePreset(ROOT + "settings");
+                    WritePreset(".\\settings");
                     return true;
+                }
+                else
+                {
+                    var confirmResult = MessageBox.Show("Preset Logic mode selected or User Logic mode selected without Logic Loaded. Closing now will not save your settings, are you sure you want to close?",
+                         "Are you sure?",
+                         MessageBoxButtons.YesNo);
+                    if (confirmResult == DialogResult.Yes)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
 
@@ -729,22 +745,29 @@ namespace MMRando
             {
                 if (_settings.UserLogicFileName != null && File.Exists(_settings.UserLogicFileName))
                 {
-                   WritePreset(ROOT + "settings");
+                   WritePreset(".\\settings");
                    return true;
+                }
+                else
+                {
+                    var confirmResult = MessageBox.Show("Preset Logic mode selected or User Logic mode selected without Logic Loaded. Closing now will not save your settings, are you sure you want to close?",
+                         "Are you sure?",
+                         MessageBoxButtons.YesNo);
+                    if (confirmResult == DialogResult.Yes)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
 
-            var confirmResult = MessageBox.Show("Preset Logic mode selected or User Logic mode selected without Logic Loaded. Closing now will not save your settings, are you sure you want to close?",
-                                     "Are you sure?",
-                                     MessageBoxButtons.YesNo);
-            if (confirmResult == DialogResult.Yes)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            WritePreset(".\\settings");
+            return true;
+
+
         }
 
         private void mAbout_Click(object sender, EventArgs e)
@@ -1232,7 +1255,7 @@ namespace MMRando
 
                 if (PresetInit)
                 {
-                    File.Delete(ROOT + initSettingsFilename + PresetExt);
+                    File.Delete(".\\" + initSettingsFilename + PresetExt);
                 }
                 else
                 {
@@ -1420,7 +1443,7 @@ namespace MMRando
                     UpdateCustomItemAmountLabel();
                     UpdateSettingString();
                     
-                    if(lines[4].Equals("LOGIC"))
+                    if(lines.Length > 4 && lines[4].Equals("LOGIC"))
                     {
                         _settings.LogicMode = LogicMode.Preset;
                         cMode.SelectedIndex = (int)LogicMode.Preset;
@@ -1429,12 +1452,5 @@ namespace MMRando
                 }
             }
         }
-
-        private void MaroDebug(string message)
-        {
-            MessageBox.Show(message, "Debug", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
-
     }
 }
