@@ -33,6 +33,7 @@ namespace MMRando
         public const string initSettingsFilename = "settings";
         public bool PresetInit = true;
         public bool PresetHasLogic = false;
+        public bool TabsRemoved = false;
 
         private Randomizer _randomizer;
         private Builder _builder;
@@ -927,6 +928,7 @@ namespace MMRando
             if (set == Presets.Default) //Default
             {
                 _settings.LogicMode = LogicMode.Casual;
+                _settings.UseCustomItemList = false;
                 _settings.GenerateSpoilerLog = true;
                 _settings.GenerateHTMLLog = true;
 
@@ -981,6 +983,7 @@ namespace MMRando
             else if (set == Presets.Casual) //Casual 
             {
                 _settings.LogicMode = LogicMode.Casual;
+                _settings.UseCustomItemList = false;
                 _settings.GenerateSpoilerLog = true;
                 _settings.GenerateHTMLLog = true;
 
@@ -1036,6 +1039,7 @@ namespace MMRando
             {
 
                 _settings.LogicMode = LogicMode.Casual;
+                _settings.UseCustomItemList = false;
                 _settings.GenerateSpoilerLog = true;
                 _settings.GenerateHTMLLog = true;
 
@@ -1092,6 +1096,7 @@ namespace MMRando
                 Random rand = new Random();
 
                 _settings.LogicMode = LogicMode.Casual;
+                _settings.UseCustomItemList = false;
                 _settings.GenerateSpoilerLog = true;
                 _settings.GenerateHTMLLog = true;
 
@@ -1114,8 +1119,8 @@ namespace MMRando
                 _settings.RandomizeEnemies = rand.Next() > (Int32.MaxValue / 2);
 
                 _settings.DamageMode = (DamageMode)rand.Next(0, 4);
-                _settings.DamageEffect = (DamageEffect)rand.Next(0, 5); 
-                _settings.MovementMode = (MovementMode)rand.Next(0, 4); 
+                _settings.DamageEffect = (DamageEffect)rand.Next(0, 5);
+                _settings.MovementMode = (MovementMode)rand.Next(0, 4);
                 _settings.FloorType = (FloorType)rand.Next(0, 4);
                 _settings.ClockSpeed = (ClockSpeed)rand.Next(0, 5);
                 _settings.BlastMaskCooldown = (BlastMaskCooldown)rand.Next(0, 5);
@@ -1164,6 +1169,26 @@ namespace MMRando
                 //I actually don't have to do anything here...
             }
 
+            
+
+            if(set == Presets.Random)
+            {
+                tSettings.TabPages.Remove(this.tabMain);
+                tSString.Visible = false;
+                TabsRemoved = true;
+            }
+            else if(TabsRemoved)
+            {
+                tSettings.TabPages.Remove(this.tabGimmick);
+                tSettings.TabPages.Remove(this.tabComfort);
+                tSettings.TabPages.Add(this.tabMain);
+                tSettings.TabPages.Add(this.tabGimmick);
+                tSettings.TabPages.Add(this.tabComfort);
+                tSString.Visible = true;
+                TabsRemoved = false;
+            }
+
+
 
             _isUpdating = false;
 
@@ -1177,6 +1202,8 @@ namespace MMRando
             catch
             {
                 tSString.Text = _oldSettingsString;
+                UpdateCheckboxes();
+                ToggleCheckBoxes();
                 _settings.Update(_oldSettingsString);
                 MessageBox.Show("Something went wrong importing the preset!.",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1485,6 +1512,7 @@ namespace MMRando
 
         private void bLoadPreset_Click(object sender, EventArgs e)
         {
+            cPresets.SelectedIndex = (int)Presets.Custom;
             if (openPreset.ShowDialog() == DialogResult.OK)
             {
                 _settings.UserPresetFileName = openPreset.FileName;
@@ -1616,7 +1644,11 @@ namespace MMRando
 
                 if (ValidatePresetFile(lines))
                 {
-                    cPresets.SelectedIndex = (int)Presets.Custom;
+                    if(cPresets.SelectedIndex != (int)Presets.Accessible)
+                    {
+                        cPresets.SelectedIndex = (int)Presets.Custom;
+                    }
+                    
                     tbPreset.Text = Path.GetFileNameWithoutExtension(filename);
 
                     tSString.Text = lines[1];
