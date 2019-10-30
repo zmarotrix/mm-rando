@@ -292,7 +292,8 @@ namespace MMRando
             "Casual",
             "Full Rando",
             "Accessible",
-            "Custom"});
+            "Custom",
+            "Random"});
             this.cPresets.Location = new System.Drawing.Point(6, 19);
             this.cPresets.Name = "cPresets";
             this.cPresets.Size = new System.Drawing.Size(276, 21);
@@ -833,7 +834,6 @@ namespace MMRando
             this.cMode.Items.AddRange(new object[] {
             "Casual",
             "Glitched",
-            "Accessible",
             "Vanilla Layout",
             "User Logic",
             "No Logic",

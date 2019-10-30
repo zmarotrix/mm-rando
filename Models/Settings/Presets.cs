@@ -7,5 +7,6 @@
         FullRando,
         Accessible,
         Custom,
+        Random,
     }
 }

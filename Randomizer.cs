@@ -383,10 +383,6 @@ namespace MMRando
             {
                 lines = Properties.Resources.REQ_GLITCH.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
             }
-            else if (mode == LogicMode.Accessible)
-            {
-                lines = Properties.Resources.ACCESSIBLE.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-            }
             else if (mode == LogicMode.UserLogic)
             {
                 using (StreamReader Req = new StreamReader(File.Open(_settings.UserLogicFileName, FileMode.Open)))

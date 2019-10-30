@@ -4,7 +4,6 @@
     {
         Casual,
         Glitched,
-        Accessible,
         Vanilla,
         UserLogic,
         NoLogic,
