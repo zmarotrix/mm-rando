@@ -41,7 +41,7 @@ namespace MMRando
             this.cUserItems = new System.Windows.Forms.CheckBox();
             this.tSettings = new System.Windows.Forms.TabControl();
             this.tabROMSettings = new System.Windows.Forms.TabPage();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.groupBoxPresets = new System.Windows.Forms.GroupBox();
             this.bSavePreset = new System.Windows.Forms.Button();
             this.tbPreset = new System.Windows.Forms.TextBox();
             this.bLoadPreset = new System.Windows.Forms.Button();
@@ -159,7 +159,7 @@ namespace MMRando
             this.bLoadPatch = new System.Windows.Forms.Button();
             this.tSettings.SuspendLayout();
             this.tabROMSettings.SuspendLayout();
-            this.groupBox6.SuspendLayout();
+            this.groupBoxPresets.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gGameOutput.SuspendLayout();
             this.tabMain.SuspendLayout();
@@ -228,7 +228,7 @@ namespace MMRando
             // 
             // tabROMSettings
             // 
-            this.tabROMSettings.Controls.Add(this.groupBox6);
+            this.tabROMSettings.Controls.Add(this.groupBoxPresets);
             this.tabROMSettings.Controls.Add(this.groupBox1);
             this.tabROMSettings.Controls.Add(this.gGameOutput);
             this.tabROMSettings.Controls.Add(this.label1);
@@ -244,16 +244,16 @@ namespace MMRando
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.bSavePreset);
-            this.groupBox6.Controls.Add(this.tbPreset);
-            this.groupBox6.Controls.Add(this.bLoadPreset);
-            this.groupBox6.Controls.Add(this.cPresets);
-            this.groupBox6.Location = new System.Drawing.Point(30, 70);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(288, 113);
-            this.groupBox6.TabIndex = 17;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Settings Presets";
+            this.groupBoxPresets.Controls.Add(this.bSavePreset);
+            this.groupBoxPresets.Controls.Add(this.tbPreset);
+            this.groupBoxPresets.Controls.Add(this.bLoadPreset);
+            this.groupBoxPresets.Controls.Add(this.cPresets);
+            this.groupBoxPresets.Location = new System.Drawing.Point(30, 70);
+            this.groupBoxPresets.Name = "groupBox6";
+            this.groupBoxPresets.Size = new System.Drawing.Size(288, 113);
+            this.groupBoxPresets.TabIndex = 17;
+            this.groupBoxPresets.TabStop = false;
+            this.groupBoxPresets.Text = "Settings Presets";
             // 
             // bSavePreset
             // 
@@ -1718,8 +1718,8 @@ namespace MMRando
             this.tSettings.ResumeLayout(false);
             this.tabROMSettings.ResumeLayout(false);
             this.tabROMSettings.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
+            this.groupBoxPresets.ResumeLayout(false);
+            this.groupBoxPresets.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.gGameOutput.ResumeLayout(false);
@@ -1872,7 +1872,7 @@ namespace MMRando
         private System.Windows.Forms.CheckBox cFasterLabFish;
         private System.Windows.Forms.CheckBox cGoodDampeRNG;
         private System.Windows.Forms.CheckBox cSkipBeaver;
-        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.GroupBox groupBoxPresets;
         private System.Windows.Forms.ComboBox cPresets;
         private System.Windows.Forms.TextBox tbPreset;
         private System.Windows.Forms.Button bLoadPreset;
