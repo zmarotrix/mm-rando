@@ -1635,8 +1635,9 @@ namespace MMRando
             PresetFile.WriteLine(tSString.Text);
             PresetFile.WriteLine(tCustomItemList.Text);
             PresetFile.WriteLine(tStartingItemList.Text);
+            PresetFile.WriteLine(tJunkLocationsList.Text);
 
-            if(_settings.LogicMode == LogicMode.UserLogic)
+            if (_settings.LogicMode == LogicMode.UserLogic)
             {
                 if(_settings.UserLogicFileName != null && File.Exists(_settings.UserLogicFileName))
                 {
@@ -1692,11 +1693,14 @@ namespace MMRando
                     tStartingItemList.Text = lines[3];
                     StartingItemEditor.UpdateChecks(tStartingItemList.Text);
 
+                    tJunkLocationsList.Text = lines[4];
+                    JunkLocationEditor.UpdateChecks(tJunkLocationsList.Text);
+
                     UpdateCustomStartingItemAmountLabel();
                     UpdateCustomItemAmountLabel();
                     UpdateSettingString();
                     
-                    if(lines.Length > 4 && lines[4].Equals("LOGIC"))
+                    if(lines.Length > 5 && lines[5].Equals("LOGIC"))
                     {
                         PresetHasLogic = true;
                         _settings.LogicMode = LogicMode.Preset;

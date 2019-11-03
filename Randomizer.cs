@@ -397,7 +397,7 @@ namespace MMRando
                 {
                     lines = Req.ReadToEnd().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
-                    if(lines[4].Equals("LOGIC"))
+                    if(lines[5].Equals("LOGIC"))
                     {
                         string[] sliced = null;
 
