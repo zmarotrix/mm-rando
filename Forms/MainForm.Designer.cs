@@ -247,14 +247,14 @@ namespace MMRando
             this.tabROMSettings.Text = "ROM Settings";
             this.tabROMSettings.UseVisualStyleBackColor = true;
             // 
-            // groupBox6
+            // groupBoxPresets
             // 
             this.groupBoxPresets.Controls.Add(this.bSavePreset);
             this.groupBoxPresets.Controls.Add(this.tbPreset);
             this.groupBoxPresets.Controls.Add(this.bLoadPreset);
             this.groupBoxPresets.Controls.Add(this.cPresets);
             this.groupBoxPresets.Location = new System.Drawing.Point(30, 70);
-            this.groupBoxPresets.Name = "groupBox6";
+            this.groupBoxPresets.Name = "groupBoxPresets";
             this.groupBoxPresets.Size = new System.Drawing.Size(288, 113);
             this.groupBoxPresets.TabIndex = 17;
             this.groupBoxPresets.TabStop = false;
@@ -1511,7 +1511,7 @@ namespace MMRando
             this.mHelp});
             this.mMenu.Location = new System.Drawing.Point(0, 0);
             this.mMenu.Name = "mMenu";
-            this.mMenu.Size = new System.Drawing.Size(358, 24);
+            this.mMenu.Size = new System.Drawing.Size(355, 24);
             this.mMenu.TabIndex = 12;
             this.mMenu.Text = "mMenu";
             // 
