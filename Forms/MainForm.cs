@@ -1709,5 +1709,33 @@ namespace MMRando
                 }
             }
         }
+
+        private void SaveSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_settings.LogicMode == LogicMode.Preset)
+            {
+                MessageBox.Show("Cannot save Preset Logic Mode in a Settings Preset! Change your logic mode!",
+"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (_settings.LogicMode != LogicMode.UserLogic || (_settings.LogicMode == LogicMode.UserLogic && ValidateLogicFile()))
+            {
+                if (savePreset.ShowDialog() == DialogResult.OK)
+                {
+                    WritePreset(savePreset.FileName);
+                }
+            }
+        }
+
+        private void LoadSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cPresets.SelectedIndex = (int)Presets.Custom;
+            if (openPreset.ShowDialog() == DialogResult.OK)
+            {
+                _settings.UserPresetFileName = openPreset.FileName;
+                ReadPreset(_settings.UserPresetFileName);
+            }
+        }
     }
 }
