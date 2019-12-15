@@ -435,26 +435,30 @@ namespace MMRando
         {
             string[] lines = null;
 
-            using (StreamReader Req = new StreamReader(File.Open(_settings.UserLogicFileName, FileMode.Open)))
-            {
-                    lines = Req.ReadToEnd().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-            }
-            else if (mode == LogicMode.Preset)
+
+            if (_settings.LogicMode == LogicMode.Preset)
             {
                 using (StreamReader Req = new StreamReader(File.Open(_settings.UserPresetFileName, FileMode.Open)))
                 {
                     lines = Req.ReadToEnd().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
-                    if(lines[5].Equals("LOGIC"))
+                    if (lines[5].Equals("LOGIC"))
                     {
                         string[] sliced = null;
 
-                        for(int i = 0; i < lines.Length-5; i++)
+                        for (int i = 0; i < lines.Length - 5; i++)
                         {
                             sliced[i] = lines[i + 4];
                         }
                         return sliced;
                     }
+                }
+            }
+            else
+            {
+                using (StreamReader Req = new StreamReader(File.Open(_settings.UserLogicFileName, FileMode.Open)))
+                {
+                    lines = Req.ReadToEnd().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
                 }
             }
 

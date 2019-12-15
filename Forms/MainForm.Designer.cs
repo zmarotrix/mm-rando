@@ -83,7 +83,6 @@ namespace MMRando
             this.cAdditional = new System.Windows.Forms.CheckBox();
             this.cMoonItems = new System.Windows.Forms.CheckBox();
             this.lMode = new System.Windows.Forms.Label();
-            this.bLoadLogic = new System.Windows.Forms.Button();
             this.cMode = new System.Windows.Forms.ComboBox();
             this.tabGimmick = new System.Windows.Forms.TabPage();
             this.cBlastCooldown = new System.Windows.Forms.ComboBox();
@@ -387,7 +386,6 @@ namespace MMRando
             this.tabMain.Controls.Add(this.groupBox3);
             this.tabMain.Controls.Add(this.groupBox2);
             this.tabMain.Controls.Add(this.lMode);
-            this.tabMain.Controls.Add(this.bLoadLogic);
             this.tabMain.Controls.Add(this.cMode);
             this.tabMain.Location = new System.Drawing.Point(4, 25);
             this.tabMain.Name = "tabMain";
@@ -823,16 +821,6 @@ namespace MMRando
             this.lMode.TabIndex = 0;
             this.lMode.Text = "Mode/Logic:";
             // 
-            // bLoadLogic
-            // 
-            this.bLoadLogic.Location = new System.Drawing.Point(21, 41);
-            this.bLoadLogic.Name = "bLoadLogic";
-            this.bLoadLogic.Size = new System.Drawing.Size(73, 24);
-            this.bLoadLogic.TabIndex = 17;
-            this.bLoadLogic.Text = "Open Logic";
-            this.bLoadLogic.UseVisualStyleBackColor = true;
-            this.bLoadLogic.Click += new System.EventHandler(this.bLoadLogic_Click);
-            // 
             // cMode
             // 
             this.cMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -841,6 +829,7 @@ namespace MMRando
             "Casual",
             "Glitched",
             "Vanilla Item Placement",
+            "Preset File Logic",
             "No Logic"});
             this.cMode.Location = new System.Drawing.Point(96, 13);
             this.cMode.Name = "cMode";

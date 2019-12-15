@@ -34,6 +34,7 @@ namespace MMRando
         public const string PresetExt = ".cfg";
         public const string initSettingsFilename = "settings";
         public bool PresetInit = true;
+        public bool Closing = false;
         public bool PresetHasLogic = false;
         public bool TabsRemoved = false;
 
@@ -165,9 +166,9 @@ namespace MMRando
             foreach (String logic in Logics)
             {
 
-                Display = logic.Remove(logic.Length - 4);
+                Display = Path.GetFileNameWithoutExtension(logic);
 
-                cMode.Items.Add(Display.Substring(8));
+                cMode.Items.Add(Display);
 
             }
 
@@ -281,7 +282,7 @@ namespace MMRando
         {
             if (_settings.GenerateROM && !ValidateInputFile()) return;
 
-            if ((_settings.LogicMode == LogicMode.UserLogic || _settings.LogicMode == LogicMode.Preset) && !ValidateLogicFile()) return;
+            if (_settings.LogicMode == LogicMode.Preset && !ValidateLogicFile()) return;
 
             if (ttOutput.SelectedTab.TabIndex == 1)
             {
@@ -812,56 +813,27 @@ namespace MMRando
 
         private bool StartClose()
         {
-            if (_settings.LogicMode == LogicMode.Preset)
+            Closing = true;
+            if (File.Exists(_settings.UserLogicFileName) || _settings.LogicMode == LogicMode.Vanilla || _settings.LogicMode == LogicMode.NoLogic)
             {
-                if (_settings.UserPresetFileName != null && File.Exists(_settings.UserPresetFileName))
+                WritePreset(".\\settings");
+                return true;
+            }
+            else
+            {
+                var confirmResult = MessageBox.Show("Logic file is missing or invalid! Your settings will not be save! close anyway? Also, how did you get this message?",
+                     "Are you sure?",
+                     MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
                 {
-                    WritePreset(".\\" + initSettingsFilename);
                     return true;
                 }
                 else
                 {
-                    var confirmResult = MessageBox.Show("Preset Logic mode selected or User Logic mode selected without Logic Loaded. Closing now will not save your settings, are you sure you want to close?",
-                         "Are you sure?",
-                         MessageBoxButtons.YesNo);
-                    if (confirmResult == DialogResult.Yes)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    Closing = false;
+                    return false;
                 }
             }
-
-            if (_settings.LogicMode == LogicMode.UserLogic)
-            {
-                if (_settings.UserLogicFileName != null && File.Exists(_settings.UserLogicFileName))
-                {
-                   WritePreset(".\\settings");
-                   return true;
-                }
-                else
-                {
-                    var confirmResult = MessageBox.Show("Preset Logic mode selected or User Logic mode selected without Logic Loaded. Closing now will not save your settings, are you sure you want to close?",
-                         "Are you sure?",
-                         MessageBoxButtons.YesNo);
-                    if (confirmResult == DialogResult.Yes)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            WritePreset(".\\settings");
-            return true;
-
-
         }
 
         private void mAbout_Click(object sender, EventArgs e)
@@ -1486,8 +1458,12 @@ namespace MMRando
                 }
                 else
                 {
-                    MessageBox.Show("File is not a valid preset file or outdated! Please double check file. \n \n" + _settings.UserPresetFileName,
-                       "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    DialogResult dialogResult = MessageBox.Show("File is not a valid preset file or outdated! Attempt to load anyway? \n \n",
+                       "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        return true;
+                    }
                 }
                 
             }
@@ -1496,6 +1472,8 @@ namespace MMRando
 
         private bool ValidateLogicFile()
         {
+            if (_settings.LogicMode == LogicMode.Vanilla || _settings.LogicMode == LogicMode.NoLogic) return true;
+
             if (!File.Exists(_settings.UserLogicFileName))
             {
                 MessageBox.Show("User Logic not found, please load User Logic or change logic mode. How did you get this message??",
@@ -1530,24 +1508,6 @@ namespace MMRando
             {
                 _settings.UserPresetFileName = openPreset.FileName;
                 ReadPreset(_settings.UserPresetFileName);
-            }
-        }
-
-        private void bSavePreset_Click(object sender, EventArgs e)
-        {
-            if (_settings.LogicMode == LogicMode.Preset)
-            {
-                MessageBox.Show("Cannot save Preset Logic Mode in a Settings Preset! Change your logic mode!",
-"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (_settings.LogicMode != LogicMode.UserLogic || (_settings.LogicMode == LogicMode.UserLogic && ValidateLogicFile()))
-            {
-                if (savePreset.ShowDialog() == DialogResult.OK)
-                {
-                    WritePreset(savePreset.FileName);
-                }
             }
         }
 
@@ -1617,9 +1577,9 @@ namespace MMRando
             PresetFile.WriteLine(tStartingItemList.Text);
             PresetFile.WriteLine(tJunkLocationsList.Text);
 
-            if (_settings.LogicMode == LogicMode.UserLogic)
+            if((int)_settings.LogicMode > 4 && !Closing)
             {
-                if(_settings.UserLogicFileName != null && File.Exists(_settings.UserLogicFileName))
+                if (File.Exists(_settings.UserLogicFileName))
                 {
                     PresetFile.WriteLine("LOGIC");
 
@@ -1635,7 +1595,7 @@ namespace MMRando
                 }
                 else
                 {
-                    MessageBox.Show("Must load user logic to save user logic presets.",
+                    MessageBox.Show("Logic file is missing or invalid!",
     "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     PresetFile.Dispose();
                     PresetFile.Close();
@@ -1678,7 +1638,7 @@ namespace MMRando
                     UpdateCustomItemAmountLabel();
                     UpdateSettingString();
                     
-                    if(lines.Length > 5 && lines[5].Equals("LOGIC"))
+                    if(lines.Length > 5 && lines[5].Equals("LOGIC") && !PresetInit)
                     {
                         PresetHasLogic = true;
                         _settings.LogicMode = LogicMode.Preset;
@@ -1697,7 +1657,8 @@ namespace MMRando
                 return;
             }
 
-            if (_settings.LogicMode != LogicMode.UserLogic || (_settings.LogicMode == LogicMode.UserLogic && ValidateLogicFile()))        {
+            if (ValidateLogicFile())
+            {
                 if (savePreset.ShowDialog() == DialogResult.OK)
                 {
                     WritePreset(savePreset.FileName);

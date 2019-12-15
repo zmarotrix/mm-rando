@@ -5,7 +5,7 @@
         Casual,
         Glitched,
         Vanilla,
-        NoLogic,
         Preset,
+        NoLogic,
     }
 }
