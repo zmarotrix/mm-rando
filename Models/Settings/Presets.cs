@@ -3,9 +3,6 @@
     public enum Presets
     {
         Default,
-        Casual,
-        FullRando,
-        Accessible,
         Custom,
         Random,
     }
