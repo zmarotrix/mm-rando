@@ -692,8 +692,7 @@ namespace MMRando
             }
             else if (cMode.SelectedIndex > (int)LogicMode.NoLogic && !File.Exists(LogicPath))
             {
-                //error the fuck out
-                MaroDebug("Apparently " + LogicPath + " Does not exist!!! \nHow did you get here?");
+                //error the fuck out. Should be impossible.
             }
 
             _settings.UserLogicFileName = LogicPath;
@@ -1236,23 +1235,5 @@ namespace MMRando
                 tPatch.Text = null;
             }
         }
-
-
-
-
-        public void MaroDebug(String message)
-        {
-            MessageBox.Show(message,
-                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-        }
-
-
-
-
-
-
-
-
     }
 }
