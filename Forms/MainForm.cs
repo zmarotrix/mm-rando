@@ -53,6 +53,7 @@ namespace MMRando
         {
             InitializeComponent();
             InitializeSettings();
+            InitializePresets();
             InitializeTooltips();
 
             _randomizer = new Randomizer(_settings);
@@ -79,7 +80,6 @@ namespace MMRando
             if (File.Exists(".\\" + initSettingsFilename + PresetExt))
             {
                 ReadPreset(".\\" + initSettingsFilename + PresetExt);
-                tbPreset.Text = "";
                 _settings.UserPresetFileName = "";
                 cPresets.SelectedIndex = (int)Presets.Custom;
             }
@@ -153,6 +153,24 @@ namespace MMRando
             TooltipBuilder.SetTooltip(cGoodDogRaceRNG, "Make Gold Dog always win if you have the Mask of Truth.");
             TooltipBuilder.SetTooltip(cFasterLabFish, "Change Lab Fish to only need to be fed one fish.");
         }
+
+
+        private void InitializePresets()
+        {
+            String[] Presets = Directory.GetFiles("./Presets/");
+            String Display = "";
+
+            foreach (String Preset in Presets)
+            {
+
+                Display = Path.GetFileNameWithoutExtension(Preset);
+
+                cPresets.Items.Add(Display);
+
+            }
+        }
+
+
 
         #region Forms Code
 
@@ -957,7 +975,9 @@ namespace MMRando
         public void ApplyPreset(Presets set)
         {
 
-            tbPreset.Text = "";
+            tStartingItemList.Text = "--";
+            tJunkLocationsList.Text = "------------";
+
             if (set == Presets.Default) //Default
             {
                 _settings.LogicMode = LogicMode.Casual;
@@ -998,123 +1018,12 @@ namespace MMRando
                 _settings.RandomizeSounds = false;
                 _settings.ClearHints = true;
                 _settings.UpdateShopAppearance = true;
-                _settings.UpdateChests = false;
-                _settings.PreventDowngrades = true;
-
-                _settings.Character = Character.LinkMM;
-                _settings.TatlColorSchema = TatlColorSchema.Default;
-                _settings.GossipHintStyle = GossipHintStyle.Competitive;
-                _settings.Music = Music.Default;
-                _settings.SpeedupBeavers = true;
-                _settings.SpeedupDampe = true;
-                _settings.SpeedupDogRace = true;
-                _settings.SpeedupLabFish = true;
-
-                UpdateCheckboxes();
-                UpdateSettingString();
-            }
-            else if (set == Presets.Casual) //Casual 
-            {
-                _settings.LogicMode = LogicMode.Casual;
-                _settings.UseCustomItemList = false;
-                _settings.GenerateSpoilerLog = true;
-                _settings.GenerateHTMLLog = true;
-
-                _settings.ExcludeSongOfSoaring = true;
-                _settings.AddDungeonItems = false;
-                _settings.AddMoonItems = true;
-                _settings.AddFairyRewards = true;
-                _settings.AddShopItems = true;
-                _settings.AddOther = true;
-                _settings.RandomizeBottleCatchContents = false;
-                _settings.AddNutChest = false;
-                _settings.AddCowMilk = false;
-                _settings.CrazyStartingItems = false;
-                _settings.AddSkulltulaTokens = false;
-                _settings.AddStrayFairies = false;
-                _settings.AddMundaneRewards = false;
-                _settings.RandomizeDungeonEntrances = false;
-                _settings.NoStartingItems = false;
-                _settings.AddSongs = true;
-                _settings.RandomizeEnemies = false;
-
-                _settings.DamageMode = DamageMode.Default;
-                _settings.DamageEffect = DamageEffect.Default;
-                _settings.MovementMode = MovementMode.Default;
-                _settings.FloorType = FloorType.Default;
-                _settings.ClockSpeed = ClockSpeed.Default;
-                _settings.BlastMaskCooldown = BlastMaskCooldown.Default;
-                _settings.HideClock = false;
-
-                _settings.ShortenCutscenes = true;
-                _settings.FreeHints = true;
-                _settings.QuickTextEnabled = true;
-                _settings.FixEponaSword = true;
-                _settings.RandomizeSounds = false;
-                _settings.ClearHints = true;
-                _settings.UpdateShopAppearance = true;
                 _settings.UpdateChests = true;
                 _settings.PreventDowngrades = true;
 
                 _settings.Character = Character.LinkMM;
                 _settings.TatlColorSchema = TatlColorSchema.Default;
-                _settings.GossipHintStyle = GossipHintStyle.Relevant;
-                _settings.Music = Music.Default;
-                _settings.SpeedupBeavers = true;
-                _settings.SpeedupDampe = true;
-                _settings.SpeedupDogRace = true;
-                _settings.SpeedupLabFish = true;
-
-                UpdateCheckboxes();
-                UpdateSettingString();
-            }
-            else if (set == Presets.FullRando) //Full Rando
-            {
-
-                _settings.LogicMode = LogicMode.Casual;
-                _settings.UseCustomItemList = false;
-                _settings.GenerateSpoilerLog = true;
-                _settings.GenerateHTMLLog = true;
-
-                _settings.ExcludeSongOfSoaring = true;
-                _settings.AddDungeonItems = true;
-                _settings.AddMoonItems = true;
-                _settings.AddFairyRewards = true;
-                _settings.AddShopItems = true;
-                _settings.AddOther = true;
-                _settings.RandomizeBottleCatchContents = true;
-                _settings.AddNutChest = false;
-                _settings.AddCowMilk = true;
-                _settings.CrazyStartingItems = true;
-                _settings.AddSkulltulaTokens = true;
-                _settings.AddStrayFairies = true;
-                _settings.AddMundaneRewards = true;
-                _settings.RandomizeDungeonEntrances = true;
-                _settings.NoStartingItems = true;
-                _settings.AddSongs = false;
-                _settings.RandomizeEnemies = false;
-
-                _settings.DamageMode = DamageMode.Default;
-                _settings.DamageEffect = DamageEffect.Default;
-                _settings.MovementMode = MovementMode.Default;
-                _settings.FloorType = FloorType.Default;
-                _settings.ClockSpeed = ClockSpeed.Default;
-                _settings.BlastMaskCooldown = BlastMaskCooldown.Default;
-                _settings.HideClock = false;
-
-                _settings.ShortenCutscenes = true;
-                _settings.FreeHints = true;
-                _settings.QuickTextEnabled = true;
-                _settings.FixEponaSword = true;
-                _settings.RandomizeSounds = false;
-                _settings.ClearHints = true;
-                _settings.UpdateShopAppearance = true;
-                _settings.UpdateChests = false;
-                _settings.PreventDowngrades = true;
-
-                _settings.Character = Character.LinkMM;
-                _settings.TatlColorSchema = TatlColorSchema.Default;
-                _settings.GossipHintStyle = GossipHintStyle.Random;
+                _settings.GossipHintStyle = GossipHintStyle.Competitive;
                 _settings.Music = Music.Default;
                 _settings.SpeedupBeavers = true;
                 _settings.SpeedupDampe = true;
@@ -1181,28 +1090,14 @@ namespace MMRando
                 UpdateCheckboxes();
                 UpdateSettingString();
             }
-            else if (set == Presets.Accessible) //ACCESSIBLE SETTINGS
-            {
-                if(File.Exists("./ACCESSIBLE.cfg"))
-                {
-                    ReadPreset("./ACCESSIBLE.cfg");
-                }
-                else
-                {
-                    MessageBox.Show("Accessible Preset file not found! Please get the up-to-date accessible preset file from the MMR Discord and place it in the same folder as \"MM Randomizer.exe\"",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                UpdateCustomStartingItemAmountLabel();
-                UpdateCustomItemAmountLabel();
-                UpdateSettingString();
-            }
             else if (set == Presets.Custom)
             {
                 //I actually don't have to do anything here...
             }
-
-            
+            else if(set > Presets.Random)
+            {
+                ReadPreset("./Presets/" + cPresets.Text + ".cfg");
+            }
 
             if(set == Presets.Random)
             {
@@ -1499,7 +1394,6 @@ namespace MMRando
             }
             else
             {
-                tbPreset.Text = "";
 
                 if (PresetInit)
                 {
@@ -1546,6 +1440,7 @@ namespace MMRando
         private void bLoadPreset_Click(object sender, EventArgs e)
         {
             cPresets.SelectedIndex = (int)Presets.Custom;
+            openPreset.Filter = "Config Files|*.cfg";
             if (openPreset.ShowDialog() == DialogResult.OK)
             {
                 _settings.UserPresetFileName = openPreset.FileName;
@@ -1678,12 +1573,10 @@ namespace MMRando
 
                 if (ValidatePresetFile(lines))
                 {
-                    if(cPresets.SelectedIndex != (int)Presets.Accessible)
+                    if(cPresets.SelectedIndex <= (int)Presets.Random)
                     {
                         cPresets.SelectedIndex = (int)Presets.Custom;
                     }
-                    
-                    tbPreset.Text = Path.GetFileNameWithoutExtension(filename);
 
                     tSString.Text = lines[1];
 
@@ -1719,8 +1612,7 @@ namespace MMRando
                 return;
             }
 
-            if (_settings.LogicMode != LogicMode.UserLogic || (_settings.LogicMode == LogicMode.UserLogic && ValidateLogicFile()))
-            {
+            if (_settings.LogicMode != LogicMode.UserLogic || (_settings.LogicMode == LogicMode.UserLogic && ValidateLogicFile()))        {
                 if (savePreset.ShowDialog() == DialogResult.OK)
                 {
                     WritePreset(savePreset.FileName);
@@ -1731,6 +1623,7 @@ namespace MMRando
         private void LoadSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             cPresets.SelectedIndex = (int)Presets.Custom;
+            openPreset.Filter = "Config Files|*.cfg";
             if (openPreset.ShowDialog() == DialogResult.OK)
             {
                 _settings.UserPresetFileName = openPreset.FileName;

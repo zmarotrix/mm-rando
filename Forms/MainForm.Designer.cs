@@ -42,9 +42,6 @@ namespace MMRando
             this.tSettings = new System.Windows.Forms.TabControl();
             this.tabROMSettings = new System.Windows.Forms.TabPage();
             this.groupBoxPresets = new System.Windows.Forms.GroupBox();
-            this.bSavePreset = new System.Windows.Forms.Button();
-            this.tbPreset = new System.Windows.Forms.TextBox();
-            this.bLoadPreset = new System.Windows.Forms.Button();
             this.cPresets = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cHTMLLog = new System.Windows.Forms.CheckBox();
@@ -137,6 +134,8 @@ namespace MMRando
             this.saveWad = new System.Windows.Forms.SaveFileDialog();
             this.mMenu = new System.Windows.Forms.MenuStrip();
             this.mFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mCustomise = new System.Windows.Forms.ToolStripMenuItem();
             this.mLogicEdit = new System.Windows.Forms.ToolStripMenuItem();
@@ -161,8 +160,6 @@ namespace MMRando
             this.tpPatchSettings = new System.Windows.Forms.TabPage();
             this.tPatch = new System.Windows.Forms.TextBox();
             this.bLoadPatch = new System.Windows.Forms.Button();
-            this.saveSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tSettings.SuspendLayout();
             this.tabROMSettings.SuspendLayout();
             this.groupBoxPresets.SuspendLayout();
@@ -251,44 +248,13 @@ namespace MMRando
             // 
             // groupBoxPresets
             // 
-            this.groupBoxPresets.Controls.Add(this.bSavePreset);
-            this.groupBoxPresets.Controls.Add(this.tbPreset);
-            this.groupBoxPresets.Controls.Add(this.bLoadPreset);
             this.groupBoxPresets.Controls.Add(this.cPresets);
             this.groupBoxPresets.Location = new System.Drawing.Point(30, 70);
             this.groupBoxPresets.Name = "groupBoxPresets";
-            this.groupBoxPresets.Size = new System.Drawing.Size(288, 113);
+            this.groupBoxPresets.Size = new System.Drawing.Size(288, 51);
             this.groupBoxPresets.TabIndex = 17;
             this.groupBoxPresets.TabStop = false;
             this.groupBoxPresets.Text = "Settings Presets";
-            // 
-            // bSavePreset
-            // 
-            this.bSavePreset.Location = new System.Drawing.Point(147, 45);
-            this.bSavePreset.Name = "bSavePreset";
-            this.bSavePreset.Size = new System.Drawing.Size(135, 29);
-            this.bSavePreset.TabIndex = 19;
-            this.bSavePreset.Text = "Save Preset...";
-            this.bSavePreset.UseVisualStyleBackColor = true;
-            this.bSavePreset.Click += new System.EventHandler(this.bSavePreset_Click);
-            // 
-            // tbPreset
-            // 
-            this.tbPreset.Location = new System.Drawing.Point(7, 80);
-            this.tbPreset.Name = "tbPreset";
-            this.tbPreset.ReadOnly = true;
-            this.tbPreset.Size = new System.Drawing.Size(275, 20);
-            this.tbPreset.TabIndex = 18;
-            // 
-            // bLoadPreset
-            // 
-            this.bLoadPreset.Location = new System.Drawing.Point(6, 45);
-            this.bLoadPreset.Name = "bLoadPreset";
-            this.bLoadPreset.Size = new System.Drawing.Size(135, 29);
-            this.bLoadPreset.TabIndex = 8;
-            this.bLoadPreset.Text = "Load Preset...";
-            this.bLoadPreset.UseVisualStyleBackColor = true;
-            this.bLoadPreset.Click += new System.EventHandler(this.bLoadPreset_Click);
             // 
             // cPresets
             // 
@@ -296,9 +262,6 @@ namespace MMRando
             this.cPresets.FormattingEnabled = true;
             this.cPresets.Items.AddRange(new object[] {
             "Default",
-            "Casual",
-            "Full Rando",
-            "Accessible",
             "Custom",
             "Random"});
             this.cPresets.Location = new System.Drawing.Point(6, 19);
@@ -311,7 +274,7 @@ namespace MMRando
             // 
             this.groupBox1.Controls.Add(this.cHTMLLog);
             this.groupBox1.Controls.Add(this.cSpoiler);
-            this.groupBox1.Location = new System.Drawing.Point(177, 187);
+            this.groupBox1.Location = new System.Drawing.Point(177, 128);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(141, 107);
             this.groupBox1.TabIndex = 17;
@@ -353,7 +316,7 @@ namespace MMRando
             this.gGameOutput.Controls.Add(this.cPatch);
             this.gGameOutput.Controls.Add(this.cN64);
             this.gGameOutput.Controls.Add(this.cVC);
-            this.gGameOutput.Location = new System.Drawing.Point(30, 187);
+            this.gGameOutput.Location = new System.Drawing.Point(30, 128);
             this.gGameOutput.Name = "gGameOutput";
             this.gGameOutput.Size = new System.Drawing.Size(141, 107);
             this.gGameOutput.TabIndex = 16;
@@ -1527,11 +1490,25 @@ namespace MMRando
             this.mFile.Size = new System.Drawing.Size(37, 20);
             this.mFile.Text = "File";
             // 
+            // saveSettingsToolStripMenuItem
+            // 
+            this.saveSettingsToolStripMenuItem.Name = "saveSettingsToolStripMenuItem";
+            this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.saveSettingsToolStripMenuItem.Text = "Save Settings...";
+            this.saveSettingsToolStripMenuItem.Click += new System.EventHandler(this.SaveSettingsToolStripMenuItem_Click);
+            // 
+            // loadSettingsToolStripMenuItem
+            // 
+            this.loadSettingsToolStripMenuItem.Name = "loadSettingsToolStripMenuItem";
+            this.loadSettingsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.loadSettingsToolStripMenuItem.Text = "Load Settings...";
+            this.loadSettingsToolStripMenuItem.Click += new System.EventHandler(this.LoadSettingsToolStripMenuItem_Click);
+            // 
             // mExit
             // 
             this.mExit.Name = "mExit";
             this.mExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.mExit.Size = new System.Drawing.Size(180, 22);
+            this.mExit.Size = new System.Drawing.Size(154, 22);
             this.mExit.Text = "Exit";
             this.mExit.Click += new System.EventHandler(this.mExit_Click);
             // 
@@ -1546,7 +1523,7 @@ namespace MMRando
             // mLogicEdit
             // 
             this.mLogicEdit.Name = "mLogicEdit";
-            this.mLogicEdit.Size = new System.Drawing.Size(180, 22);
+            this.mLogicEdit.Size = new System.Drawing.Size(137, 22);
             this.mLogicEdit.Text = "Logic editor";
             this.mLogicEdit.Click += new System.EventHandler(this.mLogicEdit_Click);
             // 
@@ -1747,20 +1724,6 @@ namespace MMRando
             this.bLoadPatch.UseVisualStyleBackColor = true;
             this.bLoadPatch.Click += new System.EventHandler(this.BLoadPatch_Click);
             // 
-            // saveSettingsToolStripMenuItem
-            // 
-            this.saveSettingsToolStripMenuItem.Name = "saveSettingsToolStripMenuItem";
-            this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveSettingsToolStripMenuItem.Text = "Save Settings...";
-            this.saveSettingsToolStripMenuItem.Click += new System.EventHandler(this.SaveSettingsToolStripMenuItem_Click);
-            // 
-            // loadSettingsToolStripMenuItem
-            // 
-            this.loadSettingsToolStripMenuItem.Name = "loadSettingsToolStripMenuItem";
-            this.loadSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.loadSettingsToolStripMenuItem.Text = "Load Settings...";
-            this.loadSettingsToolStripMenuItem.Click += new System.EventHandler(this.LoadSettingsToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1786,7 +1749,6 @@ namespace MMRando
             this.tabROMSettings.ResumeLayout(false);
             this.tabROMSettings.PerformLayout();
             this.groupBoxPresets.ResumeLayout(false);
-            this.groupBoxPresets.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.gGameOutput.ResumeLayout(false);
@@ -1947,9 +1909,6 @@ namespace MMRando
         private System.Windows.Forms.TextBox tJunkLocationsList;
         private System.Windows.Forms.GroupBox groupBoxPresets;
         private System.Windows.Forms.ComboBox cPresets;
-        private System.Windows.Forms.TextBox tbPreset;
-        private System.Windows.Forms.Button bLoadPreset;
-        private System.Windows.Forms.Button bSavePreset;
         private System.Windows.Forms.ToolStripMenuItem saveSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadSettingsToolStripMenuItem;
     }
