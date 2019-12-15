@@ -6,5 +6,6 @@
         Glitched,
         Vanilla,
         NoLogic,
+        Preset,
     }
 }

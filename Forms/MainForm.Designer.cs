@@ -35,10 +35,14 @@ namespace MMRando
             this.bopen = new System.Windows.Forms.Button();
             this.openROM = new System.Windows.Forms.OpenFileDialog();
             this.openLogic = new System.Windows.Forms.OpenFileDialog();
+            this.openPreset = new System.Windows.Forms.OpenFileDialog();
+            this.savePreset = new System.Windows.Forms.SaveFileDialog();
             this.tROMName = new System.Windows.Forms.TextBox();
             this.cUserItems = new System.Windows.Forms.CheckBox();
             this.tSettings = new System.Windows.Forms.TabControl();
             this.tabROMSettings = new System.Windows.Forms.TabPage();
+            this.groupBoxPresets = new System.Windows.Forms.GroupBox();
+            this.cPresets = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cHTMLLog = new System.Windows.Forms.CheckBox();
             this.cSpoiler = new System.Windows.Forms.CheckBox();
@@ -79,6 +83,7 @@ namespace MMRando
             this.cAdditional = new System.Windows.Forms.CheckBox();
             this.cMoonItems = new System.Windows.Forms.CheckBox();
             this.lMode = new System.Windows.Forms.Label();
+            this.bLoadLogic = new System.Windows.Forms.Button();
             this.cMode = new System.Windows.Forms.ComboBox();
             this.tabGimmick = new System.Windows.Forms.TabPage();
             this.cBlastCooldown = new System.Windows.Forms.ComboBox();
@@ -129,6 +134,8 @@ namespace MMRando
             this.mMenu = new System.Windows.Forms.MenuStrip();
             this.mFile = new System.Windows.Forms.ToolStripMenuItem();
             this.importCustomLogicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mCustomise = new System.Windows.Forms.ToolStripMenuItem();
             this.mDPadConfig = new System.Windows.Forms.ToolStripMenuItem();
@@ -156,6 +163,7 @@ namespace MMRando
             this.bLoadPatch = new System.Windows.Forms.Button();
             this.tSettings.SuspendLayout();
             this.tabROMSettings.SuspendLayout();
+            this.groupBoxPresets.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gGameOutput.SuspendLayout();
             this.tabMain.SuspendLayout();
@@ -174,11 +182,11 @@ namespace MMRando
             // 
             // bopen
             // 
-            this.bopen.Location = new System.Drawing.Point(3, 37);
+            this.bopen.Location = new System.Drawing.Point(30, 34);
             this.bopen.Name = "bopen";
-            this.bopen.Size = new System.Drawing.Size(103, 27);
+            this.bopen.Size = new System.Drawing.Size(70, 27);
             this.bopen.TabIndex = 0;
-            this.bopen.Text = "Open ROM...";
+            this.bopen.Text = "Open ROM";
             this.bopen.UseVisualStyleBackColor = true;
             this.bopen.Click += new System.EventHandler(this.bopen_Click);
             // 
@@ -192,10 +200,10 @@ namespace MMRando
             // 
             // tROMName
             // 
-            this.tROMName.Location = new System.Drawing.Point(109, 41);
+            this.tROMName.Location = new System.Drawing.Point(106, 38);
             this.tROMName.Name = "tROMName";
             this.tROMName.ReadOnly = true;
-            this.tROMName.Size = new System.Drawing.Size(230, 20);
+            this.tROMName.Size = new System.Drawing.Size(212, 20);
             this.tROMName.TabIndex = 1;
             // 
             // cUserItems
@@ -225,6 +233,7 @@ namespace MMRando
             // 
             // tabROMSettings
             // 
+            this.tabROMSettings.Controls.Add(this.groupBoxPresets);
             this.tabROMSettings.Controls.Add(this.groupBox1);
             this.tabROMSettings.Controls.Add(this.gGameOutput);
             this.tabROMSettings.Controls.Add(this.label1);
@@ -238,16 +247,40 @@ namespace MMRando
             this.tabROMSettings.Text = "ROM Settings";
             this.tabROMSettings.UseVisualStyleBackColor = true;
             // 
+            // groupBoxPresets
+            // 
+            this.groupBoxPresets.Controls.Add(this.cPresets);
+            this.groupBoxPresets.Location = new System.Drawing.Point(30, 70);
+            this.groupBoxPresets.Name = "groupBoxPresets";
+            this.groupBoxPresets.Size = new System.Drawing.Size(288, 51);
+            this.groupBoxPresets.TabIndex = 17;
+            this.groupBoxPresets.TabStop = false;
+            this.groupBoxPresets.Text = "Settings Presets";
+            // 
+            // cPresets
+            // 
+            this.cPresets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cPresets.FormattingEnabled = true;
+            this.cPresets.Items.AddRange(new object[] {
+            "Default",
+            "Custom",
+            "Random"});
+            this.cPresets.Location = new System.Drawing.Point(6, 19);
+            this.cPresets.Name = "cPresets";
+            this.cPresets.Size = new System.Drawing.Size(276, 21);
+            this.cPresets.TabIndex = 18;
+            this.cPresets.SelectedIndexChanged += new System.EventHandler(this.cPresets_SelectedIndexChanged);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.cHTMLLog);
             this.groupBox1.Controls.Add(this.cSpoiler);
-            this.groupBox1.Location = new System.Drawing.Point(177, 75);
+            this.groupBox1.Location = new System.Drawing.Point(177, 128);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(141, 107);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Spoiler Log Output";
+            this.groupBox1.Text = "Tool Output";
             // 
             // cHTMLLog
             // 
@@ -256,11 +289,11 @@ namespace MMRando
             this.cHTMLLog.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cHTMLLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cHTMLLog.ForeColor = System.Drawing.Color.Black;
-            this.cHTMLLog.Location = new System.Drawing.Point(20, 51);
+            this.cHTMLLog.Location = new System.Drawing.Point(7, 51);
             this.cHTMLLog.Name = "cHTMLLog";
-            this.cHTMLLog.Size = new System.Drawing.Size(98, 17);
+            this.cHTMLLog.Size = new System.Drawing.Size(111, 17);
             this.cHTMLLog.TabIndex = 14;
-            this.cHTMLLog.Text = "Webpage .html";
+            this.cHTMLLog.Text = "Item Tracker .html";
             this.cHTMLLog.UseVisualStyleBackColor = false;
             this.cHTMLLog.CheckedChanged += new System.EventHandler(this.cHTMLLog_CheckedChanged);
             // 
@@ -271,11 +304,11 @@ namespace MMRando
             this.cSpoiler.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cSpoiler.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cSpoiler.ForeColor = System.Drawing.Color.Black;
-            this.cSpoiler.Location = new System.Drawing.Point(54, 28);
+            this.cSpoiler.Location = new System.Drawing.Point(26, 28);
             this.cSpoiler.Name = "cSpoiler";
-            this.cSpoiler.Size = new System.Drawing.Size(64, 17);
+            this.cSpoiler.Size = new System.Drawing.Size(92, 17);
             this.cSpoiler.TabIndex = 8;
-            this.cSpoiler.Text = "Text .txt";
+            this.cSpoiler.Text = "Spoiler log .txt";
             this.cSpoiler.UseVisualStyleBackColor = false;
             this.cSpoiler.CheckedChanged += new System.EventHandler(this.cSpoiler_CheckedChanged);
             // 
@@ -284,7 +317,7 @@ namespace MMRando
             this.gGameOutput.Controls.Add(this.cPatch);
             this.gGameOutput.Controls.Add(this.cN64);
             this.gGameOutput.Controls.Add(this.cVC);
-            this.gGameOutput.Location = new System.Drawing.Point(30, 75);
+            this.gGameOutput.Location = new System.Drawing.Point(30, 128);
             this.gGameOutput.Name = "gGameOutput";
             this.gGameOutput.Size = new System.Drawing.Size(141, 107);
             this.gGameOutput.TabIndex = 16;
@@ -354,6 +387,7 @@ namespace MMRando
             this.tabMain.Controls.Add(this.groupBox3);
             this.tabMain.Controls.Add(this.groupBox2);
             this.tabMain.Controls.Add(this.lMode);
+            this.tabMain.Controls.Add(this.bLoadLogic);
             this.tabMain.Controls.Add(this.cMode);
             this.tabMain.Location = new System.Drawing.Point(4, 25);
             this.tabMain.Name = "tabMain";
@@ -783,11 +817,21 @@ namespace MMRando
             this.lMode.BackColor = System.Drawing.Color.Transparent;
             this.lMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lMode.ForeColor = System.Drawing.Color.Black;
-            this.lMode.Location = new System.Drawing.Point(25, 17);
+            this.lMode.Location = new System.Drawing.Point(23, 17);
             this.lMode.Name = "lMode";
             this.lMode.Size = new System.Drawing.Size(68, 13);
             this.lMode.TabIndex = 0;
             this.lMode.Text = "Mode/Logic:";
+            // 
+            // bLoadLogic
+            // 
+            this.bLoadLogic.Location = new System.Drawing.Point(21, 41);
+            this.bLoadLogic.Name = "bLoadLogic";
+            this.bLoadLogic.Size = new System.Drawing.Size(73, 24);
+            this.bLoadLogic.TabIndex = 17;
+            this.bLoadLogic.Text = "Open Logic";
+            this.bLoadLogic.UseVisualStyleBackColor = true;
+            this.bLoadLogic.Click += new System.EventHandler(this.bLoadLogic_Click);
             // 
             // cMode
             // 
@@ -800,7 +844,7 @@ namespace MMRando
             "No Logic"});
             this.cMode.Location = new System.Drawing.Point(96, 13);
             this.cMode.Name = "cMode";
-            this.cMode.Size = new System.Drawing.Size(222, 21);
+            this.cMode.Size = new System.Drawing.Size(219, 21);
             this.cMode.TabIndex = 1;
             this.cMode.SelectedIndexChanged += new System.EventHandler(this.cMode_SelectedIndexChanged);
             // 
@@ -1430,6 +1474,8 @@ namespace MMRando
             // 
             this.mFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importCustomLogicToolStripMenuItem,
+            this.saveSettingsToolStripMenuItem,
+            this.loadSettingsToolStripMenuItem,
             this.mExit});
             this.mFile.Name = "mFile";
             this.mFile.Size = new System.Drawing.Size(37, 20);
@@ -1441,6 +1487,20 @@ namespace MMRando
             this.importCustomLogicToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.importCustomLogicToolStripMenuItem.Text = "Import Custom Logic";
             this.importCustomLogicToolStripMenuItem.Click += new System.EventHandler(this.ImportCustomLogicToolStripMenuItem_Click);
+            // 
+            // saveSettingsToolStripMenuItem
+            // 
+            this.saveSettingsToolStripMenuItem.Name = "saveSettingsToolStripMenuItem";
+            this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.saveSettingsToolStripMenuItem.Text = "Save Settings...";
+            this.saveSettingsToolStripMenuItem.Click += new System.EventHandler(this.SaveSettingsToolStripMenuItem_Click);
+            // 
+            // loadSettingsToolStripMenuItem
+            // 
+            this.loadSettingsToolStripMenuItem.Name = "loadSettingsToolStripMenuItem";
+            this.loadSettingsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.loadSettingsToolStripMenuItem.Text = "Load Settings...";
+            this.loadSettingsToolStripMenuItem.Click += new System.EventHandler(this.LoadSettingsToolStripMenuItem_Click);
             // 
             // mExit
             // 
@@ -1694,6 +1754,7 @@ namespace MMRando
             this.tSettings.ResumeLayout(false);
             this.tabROMSettings.ResumeLayout(false);
             this.tabROMSettings.PerformLayout();
+            this.groupBoxPresets.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.gGameOutput.ResumeLayout(false);
@@ -1732,10 +1793,12 @@ namespace MMRando
         private System.Windows.Forms.OpenFileDialog openROM;
         private System.Windows.Forms.OpenFileDialog openPatch;
         private System.Windows.Forms.OpenFileDialog openLogic;
+        private System.Windows.Forms.OpenFileDialog openPreset;
         private System.Windows.Forms.TextBox tROMName;
         private System.Windows.Forms.ComboBox cMode;
         private System.Windows.Forms.Label lMode;
         private System.Windows.Forms.SaveFileDialog saveROM;
+        private System.Windows.Forms.SaveFileDialog savePreset;
         private System.Windows.Forms.ComboBox cTatl;
         private System.Windows.Forms.Label lTatl;
         private System.Windows.Forms.ComboBox cLink;
@@ -1848,6 +1911,10 @@ namespace MMRando
         private System.Windows.Forms.Label lJunkLocationsAmount;
         private System.Windows.Forms.Button bJunkLocationsEditor;
         private System.Windows.Forms.TextBox tJunkLocationsList;
+        private System.Windows.Forms.GroupBox groupBoxPresets;
+        private System.Windows.Forms.ComboBox cPresets;
+        private System.Windows.Forms.ToolStripMenuItem saveSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mDPadConfig;
         private System.Windows.Forms.ToolStripMenuItem importCustomLogicToolStripMenuItem;
     }
